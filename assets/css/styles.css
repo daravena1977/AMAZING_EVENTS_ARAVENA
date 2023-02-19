@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #003049;
+}
+
+#banner {
+    background-image: url("../img/banner_amazing_events.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
+    color: transparent;
+}
+
+.nav-item{
+    margin-left: 0.5rem;
+    font-size: large;
+}
+
+.nav-link {
+    color: #d62828;
+}
+
+.active {
+    color: #2A9D8F !important;
+}
+
+i {
+    
+}
+
