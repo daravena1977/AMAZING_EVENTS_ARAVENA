@@ -1,0 +1,4 @@
+{
+    "editor.autoClosingBrackets": "languageDefined",
+    "prettier.bracketSameLine": true
+}

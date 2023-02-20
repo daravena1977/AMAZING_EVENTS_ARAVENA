@@ -7,7 +7,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 70vh;
+    height: 60vh;
     color: transparent;
 }
 
@@ -24,7 +24,59 @@
     color: #2A9D8F !important;
 }
 
-i {
-    
+footer {
+    background-color: #2A9D8F;
 }
 
+.svg-footer {
+    margin-left: 1rem;
+}
+
+
+
+@media (max-width: 767px) {
+
+
+    .card {
+        width: 90% !important;
+    }
+
+
+}
+
+@media (max-width: 767px) {
+    .categories {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .container-search {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+
+    .search {
+        justify-content: start !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .container-search {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+        align-items: start;
+    }
+
+    .search {
+        justify-content: start !important;
+    }
+
+
+}
+
+/* @media (max-width: 767px) {
+    .
+} */
