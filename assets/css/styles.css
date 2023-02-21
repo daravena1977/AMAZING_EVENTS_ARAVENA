@@ -1,82 +1,70 @@
 .navbar {
-    background-color: #003049;
+  background-color: #003049;
 }
 
 #banner {
-    background-image: url("../img/banner_amazing_events.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 60vh;
-    color: transparent;
+  background-image: url("../img/banner_amazing_events.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60vh;
+  color: transparent;
 }
 
-.nav-item{
-    margin-left: 0.5rem;
-    font-size: large;
+.nav-item {
+  margin-left: 0.5rem;
+  font-size: large;
 }
 
 .nav-link {
-    color: #d62828;
+  color: #d62828;
 }
 
 .active {
-    color: #2A9D8F !important;
+  color: #2a9d8f !important;
 }
 
 footer {
-    background-color: #2A9D8F;
+  background-color: #2a9d8f;
 }
 
 .svg-footer {
-    margin-left: 1rem;
-}
-
-
-
-@media (max-width: 767px) {
-
-
-    .card {
-        width: 90% !important;
-    }
-
-
+  margin-left: 1rem;
 }
 
 @media (max-width: 767px) {
-    .categories {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
+  .card {
+    width: 90% !important;
+  }
+}
 
-    .container-search {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.5rem;
-    }
+@media (max-width: 767px) {
+  .categories {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
-    .search {
-        justify-content: start !important;
-    }
+  .container-search {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .search {
+    justify-content: start !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1400px) {
-    .container-search {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1.5rem;
-        align-items: start;
-    }
+  .container-search {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
 
-    .search {
-        justify-content: start !important;
-    }
-
-
+  .search {
+    justify-content: start !important;
+  }
 }
-
-/* @media (max-width: 767px) {
-    .
-} */
