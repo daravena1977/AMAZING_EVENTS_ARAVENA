@@ -1,14 +1,83 @@
-.navbar {
-  background-color: #003049;
+* {
+  font-family: 'Poppins', sans-serif;
 }
 
-#banner {
-  background-image: url("../img/banner_amazing_events.png");
+.navbar {
+  background-color: rgb(16, 29, 54);
+  /* background-color: rgb(0, 48, 73); */
+  
+}
+
+.principal-nav a {
+  color: white;
+  font-size: 1.4rem;
+}
+
+
+
+
+
+.banner {
+  /* background-image: linear-gradient(rgba(0, 47, 73, 0.781), rgba(0, 0, 0, 0.151)), url(../img/banner_fiesta2.png); */
+  background-image: linear-gradient(rgba(16, 29, 54, 0.486), rgba(0, 0, 0, 0.158)), url(../img/banner_purpura.png);
+  /* background-image: url("../img/Movie_theatre_people_banner.png"); */
+  height: 70vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 60vh;
-  color: transparent;
+  /* background-color: rgb(0, 0, 0, 0.5);   */
+  color: white;
+  font-size: 4rem;
+  text-align: center;
+  
+  
+}
+
+.banner h1 {
+  margin-top: 10rem;
+  font-size: 2.5rem;
+}
+
+.banner h2 {
+  display: inline-block !important;
+  position: relative;
+  font-size: 15px;
+  left: 15px;
+}
+
+.banner h2::before {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background-color: #9815d4;
+  font-weight:900;
+  top: 0.6em;
+  
+}
+
+.banner h2::before {
+  left: -35px;
+}
+
+.banner p {
+  font-style: italic;
+}
+
+#label-page {
+  height: 5vh;
+}
+
+#label-page h2 {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  background-color: #eae0d5;
+  padding: 1rem 3.5rem;
+  color: #000;
+  font-size: 1.5rem;
+  top: -2rem;
+  left: 28vw;
 }
 
 .nav-item {
@@ -21,21 +90,143 @@
 }
 
 .active {
-  color: #2a9d8f !important;
+  color: #873FE9 !important;
 }
 
+/* MAIN */
+
+/* SECCCION CHECKBOX-FILTRO-BUSQUEDA */
+
+.formulario input[type="checkbox"] {
+  display: none;
+}
+
+.formulario label {
+  color:#0774D9;
+  padding: 5px 15px 5px 51px;
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.formulario label:hover {
+  background: rgba(0, 116, 217, 0.1);
+}
+
+.formulario label::before {
+  content: "";
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  background: none;
+  border: 2px solid #0774D9;
+  position: absolute;
+  left: 17px;
+  top: 9px;
+}
+
+.formulario input[type="checkbox"]:checked + label {
+  padding: 5px 15px;
+  background: #0774D9;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.formulario input[type="checkbox"]:checked + label::before{
+  display: none;
+}
+
+/* SECCION INPUT-SEARCH */
+
+.search-category {
+  position: absolute;
+  padding: 5px;
+  margin-left: 1rem;
+}
+
+.search-category input {
+  width: 0px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 18px;
+  color: #000;
+  outline: none;
+  border: 1px solid silver;
+  border-radius: 55px;
+  transition-property: width;
+  transition: 1.5s ease;
+}
+
+.btn-category {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #873FE9;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  
+}
+
+.search-category:hover input {
+  width: 280px;
+}
+
+/* .search-btn {
+  background-color: #2A9D8F;
+  border: none;
+  color: #264653;
+}
+
+.search-btn:hover {
+  color: ;
+} */
+
+
+
+
 footer {
-  background-color: #2a9d8f;
+  background-color: #873FE9;
 }
 
 .svg-footer {
   margin-left: 1rem;
 }
 
+/* RESPONSIVE */
+
+@media (min-width: 575px) {
+  #banner {
+    display: block;
+    height: 60vh;    
+  }
+
+  .banner {
+    padding: 0;
+  }
+
+  .nav-check {
+    padding-top: 0.2rem !important;
+    margin-top: 0.1rem !important;
+  }
+
+  .search-category:hover input {
+    width: 495px;
+  }
+}
+
 @media (max-width: 767px) {
   .card {
     width: 90% !important;
   }
+  
 }
 
 @media (max-width: 767px) {

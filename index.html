@@ -11,20 +11,25 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet" />
     <script
       src="https://kit.fontawesome.com/542394652c.js"
       crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid d-flex justify-content-between">
+      <nav class="nav-header navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid d-flex justify-content-between p-3">
           <img
             src="./assets/img/Logo Amazing Events.png"
             alt="Logo Amazing Events"
-            width="90px" />
+            width="150px" />
           <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-          <div class="nav-navbar me-4">
+          <div class="nav-navbar me-1">
             <button
               class="navbar-toggler"
               type="button"
@@ -35,166 +40,142 @@
               aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Upcoming Events</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Past Events</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link">Stats</a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
+        <div class="principal-nav collapse navbar-collapse" id="navbarNav">
+          <ul class="align-items-end me-3 navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Upcomingg Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Past Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Stats</a>
+            </li>
+          </ul>
+        </div>
       </nav>
-      <div class="container row m-auto">
-        <div class="col align-items-center">
-          <h2 id="banner">Banner</h2>
+      <div class="row m-auto">
+        <div class="banner col align-items-center">
+          <h1 id="banner">Amazing Events</h1>
+          <h2>Made your life an AMAZING experience</h2>
+          <p>Join Us!</p>
         </div>
       </div>
-    </header>
-    <main class="container">
-      <nav class="container navbar bg-body-tertiary pt-3">
+      <div id="label-page">
+        <h2>HOME</h2>
+      </div>
+
+      <nav class="nav-check container navbar bg-body-tertiary">
         <div class="container">
-          <form class="container-search d-flex justify-content-between w-100" role="search">
+          <form
+            class="formulario container-search d-flex justify-content-between w-100"
+            role="search">
             <fieldset
-              class="d-flex justify-content-between categories w-100 p-4">
-              <label>
-                <input type="checkbox" name="" id="" />
-                Cinema
-              </label>
-              <label>
-                <input type="checkbox" name="" id="" />
-                Custome Party
-              </label>
-              <label>
-                <input type="checkbox" name="" id="" />
-                Food Fair
-              </label>
-              <label>
-                <input type="checkbox" name="" id="" />
-                Museum Tour
-              </label>
-              <label>
-                <input type="checkbox" name="" id="" />
-                Music Concert
-              </label>
+              class="d-flex justify-content-between categories w-100">
+              <input class="mycheck" type="checkbox" name="cine" id="cine" />
+              <label for="cine">Cinema</label>
+              <input type="checkbox" name="cine" id="party" />
+              <label for="party">Custome Party</label>
+              <input type="checkbox" name="food" id="food" />
+              <label for="food">Food Fair</label>
+              <input type="checkbox" name="museum" id="museum" />
+              <label for="museum">Museum Tour</label>
+              <input type="checkbox" name="music" id="music" />
+              <label for="music">Music Concert</label>
             </fieldset>
-            <fieldset
-              class="search d-flex justify-content-end align-items-center w-75">
-              <input
-                class="form-control me-2 w-75 bg-info-subtle border-5"
-                type="search"
-                placeholder="Search"
-                aria-label="Search" />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                class="bi bi-search"
-                viewBox="0 0 16 16">
-                <path
-                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg>
+            <fieldset>
+              <div class="search-category">
+                <input type="text" placeholder="Search" required />
+                <div class="btn-category">
+                  <i class="fas fa-search icon"></i>
+                </div>
+              </div>
             </fieldset>
           </form>
         </div>
       </nav>
+    </header>
+    <main class="container mt-5">
+      <div class="row">
+        <div class="col d-flex flex-wrap justify-content-center gap-3">
+          <div class="card" style="width: 18rem">
+            <img src="./assets/img/Cinema.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img
+              src="./assets/img/Costume_Party.jpg"
+              class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img
+              src="./assets/img/Costume_Party.jpg"
+              class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img
+              src="./assets/img/Food_Fair.jpg"
+              class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
 
-        <div class="row">
-          <div class="col d-flex flex-wrap justify-content-center gap-3">
-            <div class="card" style="width: 18rem">
-              <img
-                src="./assets/img/Cinema.jpg"
-                class="card-img-top"
-                alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card" style="width: 18rem">
-              <img
-                src="./assets/img/Costume_Party.jpg"
-                class="card-img-top"
-                alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card" style="width: 18rem">
-              <img
-                src="./assets/img/Costume_Party.jpg"
-                class="card-img-top"
-                alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card" style="width: 18rem">
-              <img
-                src="./assets/img/Food_Fair.jpg"
-                class="card-img-top"
-                alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          
-          
-            <div class="card" style="width: 18rem">
-              <img
-                src="./assets/img/Marathon.jpg"
-                class="card-img-top"
-                alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
+          <div class="card" style="width: 18rem">
+            <img
+              src="./assets/img/Marathon.jpg"
+              class="card-img-top"
+              alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
         </div>
-          
-          
-            
-          
-        
+      </div>
     </main>
     <footer
       class="container-fluid d-flex w-100 justify-content-lg-start p-4 mt-5">
