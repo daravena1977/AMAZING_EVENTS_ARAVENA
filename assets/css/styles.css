@@ -38,7 +38,6 @@
   display: inline-block !important;
   position: relative;
   font-size: 15px;
-  
 }
 
 .banner h2::before {
@@ -46,10 +45,9 @@
   position: absolute;
   width: 25px;
   height: 3px;
-  background-color: #ff006fc7;
+  background-color: #d80032;
   font-weight: 900;
   top: 0.6em;
-  
 }
 
 .banner h2::before {
@@ -58,7 +56,7 @@
 
 .banner p {
   font-style: italic;
-  color: #ff006fc7;
+  color: #d80032;
 }
 
 #label-page h2 {
@@ -85,19 +83,33 @@
 }
 
 .active {
-  color: #ff006fc7 !important;
+  color: #d80032 !important;
 }
 
 /* MAIN */
 
+
+
 /* SECCCION CHECKBOX-FILTRO-BUSQUEDA */
+
+.container-search {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 
 .formulario input[type="checkbox"] {
   display: none;
 }
 
 .formulario label {
-  color: #8D99AE;
+  color: #8d99ae;
   padding: 5px 15px 5px 51px;
   display: inline-block;
   position: relative;
@@ -116,7 +128,7 @@
   height: 17px;
   display: inline-block;
   background: none;
-  border: 2px solid #8D99AE;
+  border: 2px solid #8d99ae;
   position: absolute;
   left: 17px;
   top: 9px;
@@ -124,7 +136,7 @@
 
 .formulario input[type="checkbox"]:checked + label {
   padding: 5px 15px;
-  background: #8D99AE;
+  background: #8d99ae;
   border-radius: 2px;
   color: #fff;
 }
@@ -139,7 +151,7 @@
   margin-top: 3rem;
   position: absolute;
   padding: 5px;
-  margin-left: 1rem;
+  margin-left: 0;
 }
 
 .search-category input {
@@ -159,7 +171,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: #b1034e;
+  background: #d80032;
   width: 50px;
   height: 50px;
   line-height: 50px;
@@ -171,7 +183,7 @@
 }
 
 .search-category:hover input {
-  width: 280px;
+  width: clamp(70vw, 80vw, 30vw);
 }
 
 /* SECCION CARDS */
@@ -185,13 +197,15 @@
   width: 100vw !important;
   height: 50vh !important;
   background-color: #edf2f4;
+  border: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.235);
 }
 
 .card img {
   height: 50% !important;
 }
 
-.card-body  {
+.card-body {
   padding: 5%;
   height: 50%;
 }
@@ -206,7 +220,7 @@
   display: flex;
   justify-content: space-between !important;
   align-items: baseline !important;
-  margin-top: 2em;  
+  margin-top: 2em;
 }
 
 .price {
@@ -219,7 +233,7 @@
 
 .price-section .btn {
   width: 40%;
-  background-color: #D80032;
+  background-color: #d80032;
   border: none;
 }
 
@@ -230,7 +244,7 @@
 /* SECCION-FOOTER */
 
 footer {
-  background-color: #8D99AE;
+  background-color: #8d99ae;
 }
 
 .svg-footer {
@@ -239,7 +253,7 @@ footer {
 
 /* RESPONSIVE */
 
-@media (min-width: 575px) {
+/* @media (min-width: 575px) {
   #banner {
     display: block;
     height: 60vh;
@@ -257,41 +271,46 @@ footer {
   .search-category:hover input {
     width: 495px;
   }
-}
+} */
 
-/* @media (max-width: 767px) {
+
+@media  (min-width: 510px) {
   .card {
     width: 90% !important;
   }
-} */
 
-@media (max-width: 767px) {
-  .categories {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  .search-category {
+    left: 2rem;
   }
 
-  .container-search {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-  }
-
-  .search {
-    justify-content: start !important;
-  }
+  
 }
 
-@media (min-width: 768px) and (max-width: 1400px) {
-  .container-search {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-    align-items: start;
+@media (min-width: 768px) {
+  .card {
+    width: 47% !important;
+    
   }
 
-  .search {
+  .cards-section {
     justify-content: start !important;
+    gap: 2.5rem !important;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .card {
+    width: 30% !important;
+    height: 40% !important;
+  }
+
+  .card img {
+    height: 40% !important;
+  }
+
+  .card-body {
+    padding: 0.5rem;
+    height: 40% !important;
   }
 }
