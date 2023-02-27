@@ -12,6 +12,10 @@
   font-size: 1.4rem;
 }
 
+.principal-nav a:hover {
+  color: #d80032 !important;
+}
+
 .banner {
   background-image: linear-gradient(
       rgba(16, 29, 54, 0.486),
@@ -30,13 +34,13 @@
 
 .banner h1 {
   margin-top: 10rem;
-  font-size: 2.5rem;
+  font-size: clamp(3rem, 5vw, 5rem) !important;
 }
 
 .banner h2 {
   display: inline-block !important;
   position: relative;
-  font-size: 15px;
+  font-size: clamp(15px, 1.5vw, 1.5rem) !important;
 }
 
 .banner h2::before {
@@ -62,9 +66,9 @@
   display: inline-block;
   position: relative;
   text-align: center;
-  min-width: 50vw;
+  width: 50vw;
   background-color: #edf2f4;
-  padding: 1rem 3.5rem;
+  padding: 1rem 0;
   color: #000;
   font-size: clamp(0.5rem, 5vw, 2rem);
   top: -2rem;
@@ -72,22 +76,20 @@
   right: 25vw;
 }
 
-.nav-item {
+/* .nav-item {
   margin-left: 0.5rem;
   font-size: large;
-}
+} */
 
-.nav-link {
+/* .nav-link {
   color: #d62828;
-}
+} */
 
 .active {
   color: #d80032 !important;
 }
 
 /* MAIN */
-
-
 
 /* SECCCION CHECKBOX-FILTRO-BUSQUEDA */
 
@@ -182,7 +184,7 @@
 }
 
 .search-category:hover input {
-  width: clamp(70vw, 80vw, 30vw);
+  width: 60vw;
 }
 
 /* SECCION CARDS */
@@ -194,22 +196,21 @@
 .card {
   margin-top: 1.5rem;
   width: 100vw !important;
-  min-height: 40vh !important;
   background-color: #edf2f4;
   border: none;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.235);
-
 }
 
 .card img {
   height: 50% !important;
   object-fit: cover;
-
 }
 
 .card-body {
-  padding: 5%;
-  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .card-body h5 {
@@ -218,15 +219,15 @@
   font-size: 25px;
 }
 
-.card-body > p {
-  font-size: 15px;
+.card-text {
+  font-size: clamp(10px, 10vw, 15px);
 }
 
 .price-section {
   display: flex;
   justify-content: space-between !important;
   align-items: baseline !important;
-  margin-top: 2em;
+  margin-top: 1.5rem;
 }
 
 .price {
@@ -259,7 +260,11 @@ footer {
 
 /* RESPONSIVE */
 
-@media  (min-width: 510px) {
+@media (min-width: 510px) {
+  .principal-nav {
+    justify-content: flex-end !important;
+  }
+
   .card {
     width: 90% !important;
   }
@@ -267,33 +272,75 @@ footer {
   .search-category {
     left: 2rem;
   }
-
-  
 }
 
 @media (min-width: 768px) {
+  #label-page h2 {
+    width: 30vw;
+    left: 35vw;
+    right: 35vw;
+  }
+
   .card {
     width: 47% !important;
-    
   }
 
   .cards-section {
     justify-content: start !important;
     gap: 2.5rem !important;
   }
-
 }
 
-@media (min-width: 1024px) {
-  .cards-section {
-    justify-content: center !important;
-    gap: 3rem !important;
+@media (min-width: 992px) {
+  .principal-nav a {
+    font-size: 1rem;
+  }
+
+  .nav-large {
+    width: 25%;
   }
 
   .card {
-    width: 40% !important;
+    width: 30% !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-large {
+    width: 25%;
+  }
+
+  .principal-nav {
+    justify-content: flex-end;
+  }
+
+  .principal-nav ul {
+    width: fit-content;
+    justify-content: space-between;
+    gap: 1rem !important;
+  }
+
+  .principal-nav a {
+    font-size: 1rem;
+  }
+
+  .categories {
+    display: flex !important;
+    flex-direction: row;
+  }
+
+  .search-category:hover input {
+    width: 50vw;
+  }
+
+  .cards-section {
+    justify-content: start !important;
+    gap: 2.8rem !important;
+  }
+
+  .card {
+    width: 30% !important;
     min-height: 20% !important;
-    
   }
 
   .card img {
@@ -301,14 +348,28 @@ footer {
   }
 
   .card-body {
-    padding: 0.5rem;
-    height: 40% !important;
+    padding: 3%;
+    height: 10% !important;
   }
 }
 
 @media (min-width: 1200px) {
+  .search-category:hover input {
+    width: 40vw;
+  }
+
+  .cards-section {
+    gap: 3.2rem !important;
+  }
+
   .card {
-    width: 25% !important;
+    width: 22% !important;
     min-height: 20% !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .search-category:hover input {
+    width: 30vw;
   }
 }
