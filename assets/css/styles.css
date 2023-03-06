@@ -92,9 +92,10 @@
 #label-page h2 {
   margin: 0;
   text-align: center;
-  color: white;
+  color: #2e0f2d;
+  font-weight: 700;
   font-style:unset;
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-shadow: 2px 1px 10px rgba(0, 0, 0, 0.7);
 
 }
