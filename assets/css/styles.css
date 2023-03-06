@@ -9,10 +9,13 @@
 .principal-nav a {
   color: white;
   font-size: 1.4rem;
+  transition: all 1s ease;
 }
 
 .principal-nav a:hover {
   color: #d80032 !important;
+  transform: scale(1.05);
+
 }
 
 .banner {
@@ -61,7 +64,7 @@
   color: #d80032;
 }
 
-#label-page h2 {
+/* #label-page h2 {
   display: inline-block;
   position: relative;
   text-align: center;
@@ -73,6 +76,27 @@
   top: -2rem;
   left: 25vw;
   right: 25vw;
+} */
+
+#label-page {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  display: inline-block;
+  background-image: url(../img/banner_paginas2.png) !important;
+  background-size: cover;
+  padding: 4.5rem;  
+}
+
+#label-page h2 {
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-style:unset;
+  font-size: 3rem;
+  text-shadow: 2px 1px 10px rgba(0, 0, 0, 0.7);
+
 }
 
 .active {
@@ -83,16 +107,20 @@
 
 /* SECCCION CHECKBOX-FILTRO-BUSQUEDA */
 
+.nav-check {
+  margin-top: 2rem;
+}
+
 .container-search {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem !important; */
 }
 
 .categories {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
 }
 
 .formulario input[type="checkbox"] {
@@ -188,7 +216,14 @@
   width: 100vw !important;
   background-color: #edf2f4;
   border: none;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.235);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.235);
+  transition: all 400ms ease;
+}
+
+.card:hover {
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  cursor: default;
+  transform: translateY(-3%);
 }
 
 .card img {
@@ -200,17 +235,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px !important;
 }
 
 .card-body h5 {
-  font-weight: bolder;
+  font-weight: 400;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .card-text {
   font-size: clamp(10px, 10vw, 15px);
+  color: #6a6a6aec;
+  text-align: justify;
+  line-height: 1.5;
 }
 
 .price-section {
@@ -237,6 +276,7 @@
 .price-section * {
   gap: 0.5rem !important;
 }
+
 
 /* SECCION-FOOTER */
 
@@ -363,6 +403,11 @@ td {
     width: 30vw;
     left: 35vw;
     right: 35vw;
+  }
+
+  .categories {
+    display: flex;
+    justify-content: space-around;
   }
 
   .card {
