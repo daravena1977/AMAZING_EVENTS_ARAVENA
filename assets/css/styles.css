@@ -60,8 +60,10 @@
 }
 
 .banner p {
+  margin-top: 5rem;
   font-style: italic;
   color: #d80032;
+  font-size: 5rem;
 }
 
 /* #label-page h2 {
@@ -92,7 +94,7 @@
 #label-page h2 {
   margin: 0;
   text-align: center;
-  color: #2e0f2d;
+  color: #780000;
   font-weight: 700;
   font-style:unset;
   font-size: 3.5rem;
@@ -209,7 +211,7 @@
 /* SECCION CARDS */
 
 .cards-section {
-  margin-top: 5rem;
+  margin-top: 7rem;
 }
 
 .card {
