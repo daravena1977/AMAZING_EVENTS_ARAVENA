@@ -1,16 +1,13 @@
 const cards = document.querySelector(".cards-section");
-const template = document.querySelector("#template-card").content;
-const fragment = document.createDocumentFragment();
-const { events } = data;
-const { currentDate } = data;
-const [{image, name, price, description}] = events;
+const templateCard = document.querySelector("#template-card").content;
 
-for (let event of events) {
-  const {date} = event; 
-  if (date < currentDate) {
-    crearCardsFragment(event, template, fragment);
-  }
-  
+let fechaEsMayor = false;
+const { currentDate } = data;
+
+const dataFilter = {
+  events: [],
 };
 
-cards.appendChild(fragment);
+dataPorFecha(data, fechaEsMayor, currentDate);
+
+mostrarCards(cards, dataFilter, templateCard);
