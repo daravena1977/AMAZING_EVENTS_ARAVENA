@@ -78,8 +78,12 @@
           <form
             class="formulario container-search d-flex justify-content-between w-100"
             role="search">
-            <fieldset class="d-flex justify-content-between categories w-100">
-              <input class="mycheck" type="checkbox" name="cine" id="cine">
+            <fieldset id="check-category" class="d-flex justify-content-between categories w-100">
+              <template id="template-category">
+                <input type="checkbox" name="cine" id="party">
+                <label for="party"></label>
+              </template> 
+              <!-- <input class="mycheck" type="checkbox" name="cine" id="cine">
               <label for="cine">Cinema</label>
               <input type="checkbox" name="cine" id="party">
               <label for="party">Custome Party</label>
@@ -88,7 +92,7 @@
               <input type="checkbox" name="museum" id="museum">
               <label for="museum">Museum Tour</label>
               <input type="checkbox" name="music" id="music">
-              <label for="music">Music Concert</label>
+              <label for="music">Music Concert</label> -->
             </fieldset>
             <fieldset>
               <div class="search-category">

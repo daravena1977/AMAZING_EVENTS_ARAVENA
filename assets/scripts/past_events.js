@@ -11,3 +11,9 @@ const dataFilter = {
 dataPorFecha(data, fechaEsMayor, currentDate);
 
 mostrarCards(cards, dataFilter, templateCard);
+
+let newArrayCategory = []
+
+crearArrayCategory(data);
+
+crearElementoCheck(newArrayCategory);

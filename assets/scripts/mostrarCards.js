@@ -23,3 +23,28 @@ const dataPorFecha = (arrayData, EsMayor, fecha) => {
     dataFilter.events = events.filter((event) => event.date < fecha);
   }
 };
+
+const crearArrayCategory = (arrayData) => {
+  const { events } = arrayData;
+
+  events.forEach((event) => {
+    const { category } = event;
+    if (newArrayCategory.includes(category) == false) {
+      newArrayCategory.push(category);
+    }
+  });
+};
+
+const crearElementoCheck = (newArray) => {
+  const contenedor = document.getElementById("check-category");
+  const templateCheck = document.getElementById("template-category").content;
+  const fragmentCategory = document.createDocumentFragment();
+
+  newArray.forEach((category) => {
+    templateCheck.querySelector("label").textContent = category;
+    let cloneCategory = templateCheck.cloneNode(true);
+    fragmentCategory.appendChild(cloneCategory);
+  });
+
+  contenedor.appendChild(fragmentCategory);
+};
