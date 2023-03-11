@@ -14,6 +14,6 @@ mostrarCards(cards, dataFilter, templateCard);
 
 let newArrayCategory = []
 
-crearArrayCategory(data);
+crearArrayCategory(data, newArrayCategory);
 
 crearElementoCheck(newArrayCategory);

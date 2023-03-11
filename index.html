@@ -81,11 +81,9 @@
             role="search">
             <fieldset id="check-category"class="d-flex justify-content-between categories w-100">
               <template id="template-category">
-                <input type="checkbox" name="cine" id="party">
+                <input class="valores-check" value="" type="checkbox" name="category" id="party">
                 <label for="party"></label>
-              </template> 
-
-              
+              </template>               
             </fieldset>
             <fieldset>
               <div class="search-category">
@@ -107,27 +105,25 @@
         <div
           class="cards-section col d-flex flex-wrap justify-content-center gap-3">
           <template id="template-card">
-            
-          <div class="card" style="width: 18rem">
-            <img src=" " class="card-img-top" alt="...">
-            <div class="card-body">
-              <section>
-                <h5 class="card-title"></h5>
-                <p class="card-text">
-                    
-                </p>
-              </section>
-              <div class="price-section">
-                <section class="price">
-                  <h6>Price:</h6>
-                  <p></p>
+            <div class="card" style="width: 18rem">
+              <img src="" class="card-img-top" alt="...">
+              <div class="card-body">
+                <section>
+                  <h5 class="card-title"></h5>
+                  <p class="card-text">
+                      
+                  </p>
                 </section>
-                  <a href="./details.html" class="btn btn-primary">Details</a>
+                <div class="price-section">
+                  <section class="price">
+                    <h6>Price:</h6>
+                    <p></p>
+                  </section>
+                    <a href="./details.html" class="btn btn-primary">Details</a>
+                </div>
               </div>
             </div>
-          </div>
           </template>
-
         </div>
       </div>
     </main>
@@ -170,7 +166,7 @@
       crossorigin="anonymous"></script>
     
     <script src="./assets/scripts/data.js"></script>
-    <script src="./assets/scripts/mostrarCards.js"></script>
+    <script src="./assets/scripts/funciones.js"></script>
     <script src="./assets/scripts/index.js"></script>
   </body>
 </html>

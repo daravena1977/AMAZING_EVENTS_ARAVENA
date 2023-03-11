@@ -1,4 +1,6 @@
-const mostrarCards = (contenedor, arrayData, template) => {
+const mostrarCards = (arrayData) => {
+  const contenedor = document.querySelector(".cards-section");
+  const template = document.querySelector("#template-card").content;
   const { events } = arrayData;
   const fragment = document.createDocumentFragment();
   events.forEach((event) => {
@@ -13,6 +15,7 @@ const mostrarCards = (contenedor, arrayData, template) => {
     fragment.appendChild(cloneCard);
   });
   contenedor.appendChild(fragment);
+  return contenedor;
 };
 
 const dataPorFecha = (arrayData, EsMayor, fecha) => {
@@ -24,13 +27,13 @@ const dataPorFecha = (arrayData, EsMayor, fecha) => {
   }
 };
 
-const crearArrayCategory = (arrayData) => {
+const crearArrayCategory = (arrayData, newArray) => {
   const { events } = arrayData;
 
   events.forEach((event) => {
     const { category } = event;
-    if (newArrayCategory.includes(category) == false) {
-      newArrayCategory.push(category);
+    if (newArray.includes(category) == false) {
+      newArray.push(category);
     }
   });
 };
@@ -41,6 +44,9 @@ const crearElementoCheck = (newArray) => {
   const fragmentCategory = document.createDocumentFragment();
 
   newArray.forEach((category) => {
+    templateCheck.querySelector("input").setAttribute("value", category);
+    templateCheck.querySelector("input").setAttribute("id", category);
+    templateCheck.querySelector("label").setAttribute("for", category);
     templateCheck.querySelector("label").textContent = category;
     let cloneCategory = templateCheck.cloneNode(true);
     fragmentCategory.appendChild(cloneCategory);
@@ -48,3 +54,4 @@ const crearElementoCheck = (newArray) => {
 
   contenedor.appendChild(fragmentCategory);
 };
+
