@@ -375,6 +375,20 @@ td {
   display: none;
 }
 
+#container-warning {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+#container-warning svg {
+  color: red !important;
+}
+
+
+
 /* RESPONSIVE */
 
 @media (min-width: 510px) {

@@ -1,6 +1,14 @@
-
-
 mostrarCards(data);
+
+let dataFiltrada = {
+  events: [],
+};
+
+let guardarData = {
+  events: [],
+};
+
+const { events } = dataFiltrada;
 
 let newArrayCategory = [];
 
@@ -10,81 +18,150 @@ crearElementoCheck(newArrayCategory);
 
 let checkeados = [];
 
-const checkCategory = document.querySelectorAll(".valores-check");
-checkCategory.forEach((check) => {
+const allCheckbox = document.querySelectorAll(".valores-check");
+
+allCheckbox.forEach((check) => {
   check.addEventListener("click", () => {
     if (check.checked == true) {
       checkeados.push(check.value);
     } else {
       checkeados = checkeados.filter((element) => element !== check.value);
+      /* dataFiltrada.events = dataFiltrada.events.filter((event) => event.category !== check.value); */
     }
-  });
+  });  
 });
 
 const contentCheckbox = document.getElementById("check-category");
+const inputSearch = document.getElementById("input-search");
+const botonSearh = document.querySelector(".search-category input")
+
+
+let filtroPorTexto = false;
+let filtroPorCheckbox = false;
+
 contentCheckbox.addEventListener("change", () => {
-  filtrarCategorias(data);
+  filtroPorCheckbox = true;
+  if (filtroPorTexto == false) {
+    filtrarPorCategorias(data);
+    if (dataFiltrada.events.length == 0) {
+      noEncontrado();
+      dataFiltrada.events = guardarData.events;
+    } else {
+      mostrarCards(dataFiltrada);
+    }
+  } else {
+    filtrarPorCategorias(dataFiltrada);
+    if (dataFiltrada.events.length == 0) {
+      noEncontrado();
+      dataFiltrada.events = guardarData.events;
+    } else {
+      mostrarCards(dataFiltrada);
+    }
+  }
 });
 
-const filtrarCategorias = (array) => {
+inputSearch.addEventListener("keyup", () => {
+  if (inputSearch.value !== "") {
+    botonSearh.style.width = "350px";    
+  }
+  filtroPorTexto = true;
+  if (filtroPorCheckbox == false) {
+    filtrarSearch(data);
+    if (dataFiltrada.events.length < 1) {
+      noEncontrado();
+    } else {
+      mostrarCards(dataFiltrada);
+    }
+  } else {
+    filtrarSearch(dataFiltrada);
+    if (dataFiltrada.events.length < 1) {
+      noEncontrado();
+      dataFiltrada.events = guardarData.events;
+    } else {
+      mostrarCards(dataFiltrada);
+    }
+  }
+});
+
+const filtrarPorCategorias = (array) => {
   const contenedor = document.querySelector(".cards-section");
+  if (checkeados.length !== 0 && inputSearch.value !== "") {
+    array.events = data.events;
+    filtrarSearch(array);
+  }
   const { events } = array;
-  let dataFiltrada = {
+  let nuevoArray = {
     events: [],
   };
-  events.forEach((event) => {
-    const { category } = event;
-    const { _id } = event;
-    if (
-      checkeados.includes(category) &&
-      dataFiltrada.events.includes(_id) == false
-    ) {
-      dataFiltrada.events.push(event);
-    }
-  });
-  if (checkeados.every((check) => check.checked == false)) {
-    contenedor.innerHTML = `<template id="template-card">
-  <div class="card" style="width: 18rem">
-    <img src="" class="card-img-top" alt="...">
-    <div class="card-body">
-      <section>
-        <h5 class="card-title"></h5>
-        <p class="card-text">
-            
-        </p>
-      </section>
-      <div class="price-section">
-        <section class="price">
-          <h6>Price:</h6>
-          <p></p>
-        </section>
-          <a href="./details.html" class="btn btn-primary">Details</a>
-      </div>
-    </div>
-  </div>
-</template>`;
-    mostrarCards(data);
+  if (
+    (checkeados.length == 0 && inputSearch.value !== "") ||
+    (checkeados.length == 0 && inputSearch.value == "")
+  ) {
+    filtrarSearch(data);    
   } else {
-    contenedor.innerHTML = `<template id="template-card">
-  <div class="card" style="width: 18rem">
-    <img src="" class="card-img-top" alt="...">
-    <div class="card-body">
-      <section>
-        <h5 class="card-title"></h5>
-        <p class="card-text">
-            
-        </p>
-      </section>
-      <div class="price-section">
-        <section class="price">
-          <h6>Price:</h6>
-          <p></p>
-        </section>
-          <a href="./details.html" class="btn btn-primary">Details</a>
-      </div>
-    </div>
-  </div>
-</template>`;
-    mostrarCards(dataFiltrada);
+    events.forEach((event) => {
+      const { category } = event;
+      const { _id } = event;
+      if (
+        checkeados.includes(category) &&
+        nuevoArray.events.includes(event) == false
+      ) {
+        nuevoArray.events.push(event);
+        console.log(nuevoArray.events);
+      }
+    });
+    if (nuevoArray.events.length < 1) {
+      dataFiltrada.events = array.events;
+      guardarData.events = dataFiltrada.events;
+      dataFiltrada.events = [];
+    }
+    if (nuevoArray.events.length !== 0) {
+      dataFiltrada.events = nuevoArray.events;      
+    }
+  }
+};
+
+const filtrarSearch = (array) => {
+  let nuevoArray = {
+    events: [],
+  };
+  const { events } = array;
+  if (inputSearch.value == "" && checkeados.length == 0) {
+    /* mostrarCards(data); */
+    filtroPorTexto = false;
+    filtroPorCheckbox = false;
+    dataFiltrada.events = data.events;
+  }
+  if (inputSearch.value == "" && checkeados.length !== 0) {
+    filtrarPorCategorias(data);
+    mostrarCards(dataFiltrada);    
+    filtroPorTexto = false;
+  }
+  if (
+    inputSearch.value == "" &&
+    dataFiltrada.events.length > 0 &&
+    checkeados.length < 1
+  ) {
+    dataFiltrada.events = data.events;
+  } else {
+    events.forEach((event) => {
+      if (inputSearch.value !== "") {
+        nuevoArray.events = events.filter((event) =>
+          event.name.toLowerCase().includes(inputSearch.value.toLowerCase())
+        );
+      }
+    });
+    console.log(nuevoArray.events);
+    if (inputSearch.value !== "" && nuevoArray.events.length == 0) {
+      if (dataFiltrada.length == 0) {
+        guardarData.events = data.events;
+      } else {
+        guardarData.events = dataFiltrada.events;
+        dataFiltrada.events = [];
+      }
+    }
+    if (nuevoArray.events.length !== 0) {
+      dataFiltrada.events = nuevoArray.events;
+    }
   }
 };
