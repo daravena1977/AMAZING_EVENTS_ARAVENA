@@ -83,7 +83,7 @@
   color: #780000;
   font-weight: 700;
   font-style:unset;
-  font-size: 3.5rem;
+  font-size: 3rem;
   text-shadow: 2px 1px 10px rgba(0, 0, 0, 0.7);
 
 }
@@ -279,10 +279,15 @@ footer {
 
 /* DETAILS-PAGE */
 
+.main-details {
+  margin-bottom: 7.5rem;
+}
+
 .details {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 5rem !important;
+  
 }
 
 .card-details {
@@ -292,8 +297,36 @@ footer {
   padding: 1.5rem;
 }
 
+.card-details h2 {
+  margin-bottom: 2rem;
+  border-top: 1px solid #acaaaa;
+  padding: 0.5rem 2rem 0 2rem;
+  text-align: center;
+}
+
+.card-details h5 {
+  color:#a1a0a0;
+  font-size: 22px;
+  
+}
+
+.card-details p {
+  margin-bottom: 1.5rem;
+}
+
+.color {
+  color: #780000;
+  text-shadow: 2px 1px 10px rgba(0, 0, 0, 0.7);
+}
+
 .card-details p {
   text-align: justify;
+}
+
+#precio-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
 }
 
 /* FORM-CONTACT */
@@ -322,6 +355,8 @@ footer {
   width: 10rem;
   align-self: flex-end;
 }
+
+
 
 /* STATS-PAGE */
 
@@ -386,6 +421,8 @@ td {
 #container-warning svg {
   color: red !important;
 }
+
+
 
 
 

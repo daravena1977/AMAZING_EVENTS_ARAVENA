@@ -24,11 +24,12 @@ const mostrarCards = (arrayData) => {
   const { events } = arrayData;
   const fragment = document.createDocumentFragment();
   events.forEach((event) => {
-    const { image, name, price, description } = event;
+    const { image, name, price, description,_id } = event;
     template.querySelector("img").setAttribute("src", image);
     template.querySelector(".card-title").textContent = name;
     template.querySelector(".card-body section p").textContent = description;
     template.querySelector(".price p").textContent = `$${price}`;
+    template.querySelector("a").setAttribute("href", `./details.html?id=${_id}`)
 
     let cloneCard = template.cloneNode(true);
 
@@ -73,8 +74,6 @@ const crearElementoCheck = (newArray) => {
 
   contenedor.appendChild(fragmentCategory);
 };
-
-
 
 const noEncontrado = () => {
   console.log("pinte no encontrado");

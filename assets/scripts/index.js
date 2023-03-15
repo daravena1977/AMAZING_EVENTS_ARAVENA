@@ -62,7 +62,7 @@ contentCheckbox.addEventListener("change", () => {
 
 inputSearch.addEventListener("keyup", () => {
   if (inputSearch.value !== "") {
-    botonSearh.style.width = "350px";    
+    botonSearh.style.width = "300px";    
   }
   filtroPorTexto = true;
   if (filtroPorCheckbox == false) {
@@ -165,3 +165,4 @@ const filtrarSearch = (array) => {
     }
   }
 };
+
