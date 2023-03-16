@@ -279,14 +279,10 @@ footer {
 
 /* DETAILS-PAGE */
 
-.main-details {
-  margin-bottom: 7.5rem;
-}
-
 .details {
   display: flex;
   flex-direction: column;
-  margin-top: 5rem !important;
+  margin-top: 2rem !important;
   
 }
 
@@ -422,10 +418,6 @@ td {
   color: red !important;
 }
 
-
-
-
-
 /* RESPONSIVE */
 
 @media (min-width: 510px) {
@@ -556,33 +548,53 @@ td {
 /* RESPONSIVE DETAILS */
 
 @media (min-width: 992px) {
+  .main-details {
+    margin-bottom: 7.5rem;
+  }
+
   .details {
     display: flex;
     flex-direction: row;
-    margin-top: 2rem;
+    margin: auto;
     justify-content: center;
+    width: 50% !important;
+    box-shadow: 1px 2px 2px 3px rgb(0, 0, 0, 0.35);
   }
 
   .details img {
     width: 50%;
     object-fit: cover;
-    box-shadow: 0px 2px 2px rgb(0, 0, 0, 0.35);
   }
 
   .card-details {
     width: 50%;
-    padding: 2rem;
-    box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.35);
+    padding: 2rem;    
+  }
+}
+
+@media (min-width: 1024px) {
+  .details {
+    width: 100% !important;
+  }
+  .details img {
+    width: 50%;
+  }
+
+  .card-details {
+    width: 50%;
   }
 }
 
 @media (min-width: 1200px) {
+  .details {
+    width: 80% !important;
+  }
   .details img {
-    width: 40%;
+    width: 50%;
   }
 
   .card-details {
-    width: 40%;
+    width: 50%;
   }
 }
 
