@@ -21,15 +21,17 @@ const mostrarCards = (arrayData) => {
   </div>
 </template>`;
   const template = document.querySelector("#template-card").content;
-  const { events } = arrayData;
+
   const fragment = document.createDocumentFragment();
-  events.forEach((event) => {
-    const { image, name, price, description,_id } = event;
+  arrayData.forEach((event) => {
+    const { image, name, price, description, _id } = event;
     template.querySelector("img").setAttribute("src", image);
     template.querySelector(".card-title").textContent = name;
     template.querySelector(".card-body section p").textContent = description;
     template.querySelector(".price p").textContent = `$${price}`;
-    template.querySelector("a").setAttribute("href", `./details.html?id=${_id}`)
+    template
+      .querySelector("a")
+      .setAttribute("href", `./details.html?id=${_id}`);
 
     let cloneCard = template.cloneNode(true);
 
@@ -48,31 +50,62 @@ const dataPorFecha = (arrayData, EsMayor, fecha) => {
   }
 };
 
-const crearArrayCategory = (arrayData, newArray) => {
-  const { events } = arrayData;
-
-  events.forEach((event) => {
-    const { category } = event;
-    if (newArray.includes(category) == false) {
-      newArray.push(category);
-    }
-  });
+const filtrarCategorias = (arrayData) => {
+  const categorias = new Set(arrayData.map((event) => event.category));
+  return categorias;
 };
 
-const crearElementoCheck = (newArray) => {
-  const contenedor = document.getElementById("check-category");
+const mostrarCategorias = (filtrarCategorias, array) => {
+  let arrayCategorias = filtrarCategorias(array);
+  const contenedorCategorias = document.getElementById("check-category");
   const templateCheck = document.getElementById("template-category").content;
-  const fragmentCategory = document.createDocumentFragment();
-  newArray.forEach((category) => {
-    templateCheck.querySelector("input").setAttribute("value", category);
-    templateCheck.querySelector("input").setAttribute("id", category);
-    templateCheck.querySelector("label").setAttribute("for", category);
-    templateCheck.querySelector("label").textContent = category;
-    let cloneCategory = templateCheck.cloneNode(true);
-    fragmentCategory.appendChild(cloneCategory);
+  const fragmentCategorias = document.createDocumentFragment();
+  arrayCategorias.forEach((categoria) => {
+    templateCheck.querySelector("input").setAttribute("value", categoria);
+    templateCheck.querySelector("input").setAttribute("id", categoria);
+    templateCheck.querySelector("label").setAttribute("for", categoria);
+    templateCheck.querySelector("label").textContent = categoria;
+    let clonarCategoria = templateCheck.cloneNode(true);
+    fragmentCategorias.appendChild(clonarCategoria);
   });
 
-  contenedor.appendChild(fragmentCategory);
+  contenedorCategorias.appendChild(fragmentCategorias);
+};
+
+const categoriasChecked = () => {
+  const allCheckbox = document.querySelectorAll(".valores-check")
+  let arrayCheckbox = Array.from(allCheckbox)
+  console.log("arrayCheckeados")
+  console.log(arrayCheckbox)
+  let checkeados = arrayCheckbox.filter(chek => chek.checked)
+  let categoriasCheckeadas = checkeados.map(check => check.value)
+  console.log(categoriasCheckeadas)
+  return categoriasCheckeadas
+}
+
+const filtrarPorNombre = (arrayData, texto) => {
+  if (texto == "") {
+    return arrayData;
+  }
+  if (texto !== "") {
+    let filtroPoNombre = arrayData.filter((event) =>
+      event.name.toLowerCase().includes(texto.toLowerCase())
+    );
+    console.log(filtroPoNombre);
+    return filtroPoNombre;
+  }
+};
+
+const filtrarPorCategorias = (arrayData, categorias) => {
+  if (categorias.length === 0) {
+    return arrayData;
+  }
+  if (categorias.length > 0) {
+    let arrayPorCategoria = arrayData.filter((event) =>
+      categorias.includes(event.category)
+    );
+    return arrayPorCategoria;
+  }
 };
 
 const noEncontrado = () => {

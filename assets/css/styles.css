@@ -450,6 +450,7 @@ td {
   }
 
   .card {
+    min-height: 40vh;
     width: 47% !important;
   }
 
@@ -507,6 +508,7 @@ td {
   }
 
   .card {
+    min-height: 40vh;
     width: 30% !important;    
   }
 
