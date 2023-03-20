@@ -1,67 +1,75 @@
-const querySearch = document.location.search
+const querySearch = document.location.search;
 
-const id = new URLSearchParams(querySearch).get("id")
-Number.parseInt(id)
+const id = new URLSearchParams(querySearch).get("id");
 
-console.log(typeof id)
+Number.parseInt(id);
 
-const {events} = data;
+const obtenerEventos = async () => {
+  try {
+    const response = await fetch(
+      "https://mindhub-xj03.onrender.com/api/amazin"
+    );
+    if (response.status === 404) {
+      const response = await fetch(
+        "http://127.0.0.1:5500/assets/api/amazing.json"
+      );
+      dataEvents = await response.json();
+    }
+    if (response.status === 200) {
+      dataEvents = await response.json();
+    }
 
-const eventos = events.map(event => {
-    let aux = {}
-    aux._id = event._id
-    aux.image = event.image
-    aux.name = event.name
-    aux.date = event.date
-    aux.description = event.description
-    aux.category = event.category
-    aux.place = event.place
-    aux.capacity = event.capacity
-    aux.assistance = event.assistance
-    aux.price = event.price
-    aux.estimate = event.estimate
-    return aux
-})
-console.log(eventos)
+    const { events } = dataEvents;
 
-const evento = eventos.find(evento => evento._id == id)
-console.log(typeof evento.date)
+    const querySearch = document.location.search;
 
+    const id = new URLSearchParams(querySearch).get("id");
 
+    Number.parseInt(id);   
 
-const content = document.querySelector(".details")
-content.innerHTML = `<img src=${evento.image} alt="">
-<section class="card-details">
-  <h2 class="color">${evento.name}</h2>
-  <h5>Category</h5>
-  <p id="category">${evento.category}</p>
-  <h5>Description</h5>
-  <p id="description">
-    ${evento.description}
-  </p>
-  <h5>Place</h5>
-  <p id="place">
-    ${evento.place}
-  </p>  
-  <h5>Date:</h5>
-  <p id="date">${evento.date}</p>
-  <div id="precio-details">
-    <h5>Price:</h5>
-    <p id="price">$${evento.price}</p>
-  </div>
-</section>`;
-console.log("data mayor")
+    const eventos = events.map((event) => {
+      let aux = {};
+      aux._id = event._id;
+      aux.image = event.image;
+      aux.name = event.name;
+      aux.date = event.date;
+      aux.description = event.description;
+      aux.category = event.category;
+      aux.place = event.place;
+      aux.capacity = event.capacity;
+      aux.assistance = event.assistance;
+      aux.price = event.price;
+      aux.estimate = event.estimate;
+      return aux;
+    });    
 
+    const evento = eventos.find((evento) => evento._id == id);
+    
 
+    const content = document.querySelector(".details");
+    content.innerHTML = `<img src=${evento.image} alt="">
+  <section class="card-details">
+    <h2 class="color">${evento.name}</h2>
+    <h5>Category</h5>
+    <p id="category">${evento.category}</p>
+    <h5>Description</h5>
+    <p id="description">
+      ${evento.description}
+    </p>
+    <h5>Place</h5>
+    <p id="place">
+      ${evento.place}
+    </p>  
+    <h5>Date:</h5>
+    <p id="date">${evento.date}</p>
+    <div id="precio-details">
+      <h5>Price:</h5>
+      <p id="price">$${evento.price}</p>
+    </div>
+  </section>`;    
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
-
+obtenerEventos();

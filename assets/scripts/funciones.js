@@ -41,15 +41,6 @@ const mostrarCards = (arrayData) => {
   return contenedor;
 };
 
-const dataPorFecha = (arrayData, EsMayor, fecha) => {
-  const { events } = arrayData;
-  if (EsMayor == true) {
-    dataFilter.events = events.filter((event) => event.date > fecha);
-  } else {
-    dataFilter.events = events.filter((event) => event.date < fecha);
-  }
-};
-
 const filtrarCategorias = (arrayData) => {
   const categorias = new Set(arrayData.map((event) => event.category));
   return categorias;

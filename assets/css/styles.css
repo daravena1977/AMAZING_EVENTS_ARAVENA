@@ -360,8 +360,9 @@ footer {
 /* STATS-PAGE */
 
 .table-mobile {
-  width: 90%;
+  width: 95%;
   margin: auto;
+  margin-top: 2rem;
   margin-bottom: 1.5rem;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
 }
@@ -384,7 +385,7 @@ th,
 td {
   border: 1px solid black;
   text-align: start;
-  padding: 20px;
+  padding: 15px;
   border: none;
 }
 
@@ -395,9 +396,17 @@ th {
   
 }
 
+.th-secundario {
+  font-size: 0.6rem;
+}
+
+.td-contenido {
+  font-size: 0.6rem;
+}
+
 .th-principal > th {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: #161a1d;
 }
 
@@ -602,16 +611,18 @@ td {
 
 /* RESPONSIVE STATS */
 
-@media (min-width: 992px) {
-  .table-mobile {
-    display: none;
+@media (min-width: 768px) {
+  .th-secundario {
+    font-size: 1rem;
   }
-
-  .table-pc  {
-    display: block !important;
-    width: 80% !important;
-    margin: auto;
-    margin-top: 1.5rem;
-    
+  
+  .td-contenido {
+    font-size: 0.9rem;
+  }
+  
+  .th-principal > th {
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: #161a1d;
   }
 }
