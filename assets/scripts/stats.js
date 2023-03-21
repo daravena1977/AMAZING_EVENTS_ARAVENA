@@ -28,15 +28,18 @@ const obtenerEventos = async () => {
       let nuevoArray = {};
       nuevoArray.name = event.name;
       nuevoArray.category = event.category;
-      if (tiempo == true) {
-        nuevoArray.estimate = event.estimate;
-      }
-      nuevoArray.assistance = event.assistance;
       nuevoArray.capacity = event.capacity;
       nuevoArray.price = event.price;
-      nuevoArray.ganancia = parseInt(event.price * event.estimate);
-      nuevoArray.porcentajeAsistencia = parseFloat(((event.estimate / event.capacity)*100).toFixed(2))
-      return nuevoArray;
+      if (tiempo == true) {
+        nuevoArray.estimate = event.estimate;
+        nuevoArray.ganancia = parseInt(event.price * event.estimate);
+        nuevoArray.porcentajeAsistencia = parseFloat(((event.estimate / event.capacity)*100).toFixed(2))
+        return nuevoArray;
+      }
+      nuevoArray.assistance = event.assistance;
+      nuevoArray.ganancia = parseInt(event.price * event.assistance);
+      nuevoArray.porcentajeAsistencia = parseFloat(((event.assistance / event.capacity)*100).toFixed(2))
+      return nuevoArray;      
       })
       return arrayPorFecha
     }
@@ -110,6 +113,8 @@ const obtenerEventos = async () => {
       return 0;
     })
 
+    console.log(ordenarPorPorcentajeMenor)
+
     const ordenarPorCapacidadMayor = structuredClone(arrayPast).sort((a,b) => {
       if (a.capacity < b.capacity) {
         return 1;
@@ -120,58 +125,52 @@ const obtenerEventos = async () => {
       return 0;
     })
 
+    let contenedorTabla, templateTabla, fragmentTabla
+
+    const capturarElementosHtml = (selctorContendor, selectorTemplate) => {
+      contenedorTabla = document.getElementById(selctorContendor)
+      templateTabla = document.getElementById(selectorTemplate).content
+      fragmentTabla = document.createDocumentFragment()
+    }
+
     //Estadisticas primera tabla (despliegue en html)
-    const contenedorTablaUno = document.getElementById("tbody-tabla-uno")
-    const templateTablaUno = document.getElementById("template-tabla-uno").content
-    const fragmentTablaUno = document.createDocumentFragment()
-
+    capturarElementosHtml("tbody-tabla-uno", "template-tabla-uno")
+        
     const eventoMayorAsistencia = ordenarPorPorcentajeMayor.find(event => event.porcentajeAsistencia > 0)
-    templateTablaUno.getElementById("mayor-porcentaje").textContent = `${eventoMayorAsistencia.name} (${eventoMayorAsistencia.porcentajeAsistencia}%)`
+    templateTabla.getElementById("mayor-porcentaje").textContent = `${eventoMayorAsistencia.name} (${eventoMayorAsistencia.porcentajeAsistencia}%)`
     const eventoMenorAsistencia = ordenarPorPorcentajeMenor.find(event => event.porcentajeAsistencia > 0)
-    templateTablaUno.getElementById("menor-porcentaje").textContent = `${eventoMenorAsistencia.name} (${eventoMenorAsistencia.porcentajeAsistencia}%)`
+    templateTabla.getElementById("menor-porcentaje").textContent = `${eventoMenorAsistencia.name} (${eventoMenorAsistencia.porcentajeAsistencia}%)`
     const eventoMayorCapacidad = ordenarPorCapacidadMayor.find(event => event.capacity > 0)
-    templateTablaUno.getElementById("mayor-capacidad").textContent = `${eventoMayorCapacidad.name} (${eventoMayorCapacidad.capacity.toLocaleString()})`
+    templateTabla.getElementById("mayor-capacidad").textContent = `${eventoMayorCapacidad.name} (${eventoMayorCapacidad.capacity.toLocaleString()})`
 
-    let clonarRegistro = templateTablaUno.cloneNode(true)
+    let clonarRegistro = templateTabla.cloneNode(true)
 
-    fragmentTablaUno.appendChild(clonarRegistro)
+    fragmentTabla.appendChild(clonarRegistro)
 
-    contenedorTablaUno.appendChild(fragmentTablaUno)
+    contenedorTabla.appendChild(fragmentTabla)
 
     //Estadisticas segunda Tabla (despliegue en html)
 
-    const contenedorTablaDos = document.getElementById("tbody-tabla-dos")
-    const templateTablaDos = document.getElementById("template-tabla-dos").content
-    const fragmentTablaDos = document.createDocumentFragment()
+    const mostrarPorcentajesStats = (array, selectorCategoria, selectorGanancias, selectorPorcentajes) => {
+      array.forEach(event => {
+        templateTabla.getElementById(selectorCategoria).textContent = event.nombre
+        templateTabla.getElementById(selectorGanancias).textContent = `${event.ganancias.toLocaleString()} USD` 
+        templateTabla.getElementById(selectorPorcentajes).textContent = `${event.porcentajeAsistencia}%` 
+
+        let clonarRegistro = templateTabla.cloneNode(true)
+        fragmentTabla.appendChild(clonarRegistro)
+      })
+      contenedorTabla.appendChild(fragmentTabla)
+    }
+
+    capturarElementosHtml("tbody-tabla-dos", "template-tabla-dos")
+    mostrarPorcentajesStats(upcommingsStats, "categoria-upcommings", "ganancias-upcommings", "porcentaje-upcommings")
     
-    upcommingsStats.forEach(event => {
-      templateTablaDos.getElementById("categoria-upcommings").textContent = event.nombre
-      templateTablaDos.getElementById("ganancias-upcommings").textContent = `${event.ganancias.toLocaleString()} USD` 
-      templateTablaDos.getElementById("porcentaje-upcommings").textContent = `${event.porcentajeAsistencia}%` 
-
-      let clonarRegistro = templateTablaDos.cloneNode(true)
-      fragmentTablaDos.appendChild(clonarRegistro)
-    })
-
-    contenedorTablaDos.appendChild(fragmentTablaDos)
-
     //Estadisticas tercera Tabla (despliegue en html)
 
-    const contenedorTablaTres = document.getElementById("tbody-tabla-tres")
-    const templateTablaTres = document.getElementById("template-tabla-tres").content
-    const fragmentTablaTres = document.createDocumentFragment()
-    
-    pastStats.forEach(event => {
-      templateTablaTres.getElementById("categoria-past").textContent = event.nombre
-      templateTablaTres.getElementById("ganancias-past").textContent = `${event.ganancias.toLocaleString()} USD` 
-      templateTablaTres.getElementById("porcentaje-past").textContent = `${event.porcentajeAsistencia}%` 
-
-      let clonarRegistro = templateTablaTres.cloneNode(true)
-      fragmentTablaTres.appendChild(clonarRegistro)
-    })
-
-    contenedorTablaTres.appendChild(fragmentTablaTres)
-        
+    capturarElementosHtml("tbody-tabla-tres", "template-tabla-tres")
+    mostrarPorcentajesStats(pastStats, "categoria-past", "ganancias-past", "porcentaje-past")
+            
   } catch (error) {
     console.log(error);
   }
