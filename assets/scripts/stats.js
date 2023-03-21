@@ -14,40 +14,38 @@ const obtenerEventos = async () => {
     const { category } = events;
 
     let upcommingsStats = []
-    let pastStats = []    
+    let pastStats = []
+    let arrayPorFecha = []
+
+    let esFuturo = false
 
     const eventosFuturos = events.filter((event) => event.date > currentDate);
 
     const eventosPasados = events.filter((event) => event.date < currentDate);
 
-    const arrayUpcommings = eventosFuturos.map((event) => {
+    const generarArrayPorFecha = (array, tiempo) => {
+      arrayPorFecha = array.map((event) => {
       let nuevoArray = {};
       nuevoArray.name = event.name;
       nuevoArray.category = event.category;
-      nuevoArray.estimate = event.estimate;
+      if (tiempo == true) {
+        nuevoArray.estimate = event.estimate;
+      }
+      nuevoArray.assistance = event.assistance;
       nuevoArray.capacity = event.capacity;
       nuevoArray.price = event.price;
       nuevoArray.ganancia = parseInt(event.price * event.estimate);
       nuevoArray.porcentajeAsistencia = parseFloat(((event.estimate / event.capacity)*100).toFixed(2))
       return nuevoArray;
-    });
+      })
+      return arrayPorFecha
+    }
+
+    const arrayUpcommings = generarArrayPorFecha(eventosFuturos, esFuturo = true)
 
     console.log(arrayUpcommings)
 
-    const arrayPast = eventosPasados.map((event) => {
-      let nuevoArray = {};
-      nuevoArray.name = event.name;
-      nuevoArray.category = event.category;
-      nuevoArray.assistance = event.assistance;
-      nuevoArray.capacity = event.capacity;
-      nuevoArray.price = event.price;
-      nuevoArray.ganancia = parseInt((event.price * event.assistance));
-      nuevoArray.porcentajeAsistencia = parseFloat(
-        ((event.assistance / event.capacity) * 100).toFixed(2)
-      );
-
-      return nuevoArray;
-    });
+    const arrayPast = generarArrayPorFecha(eventosPasados, esFuturo = false)
 
     console.log(arrayPast)
     
