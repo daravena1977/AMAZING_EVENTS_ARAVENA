@@ -64,43 +64,34 @@ const mostrarCategorias = (filtrarCategorias, array) => {
 };
 
 const categoriasChecked = () => {
-  const allCheckbox = document.querySelectorAll(".valores-check")
-  let arrayCheckbox = Array.from(allCheckbox)
-  console.log("arrayCheckeados")
-  console.log(arrayCheckbox)
-  let checkeados = arrayCheckbox.filter(chek => chek.checked)
-  let categoriasCheckeadas = checkeados.map(check => check.value)
-  console.log(categoriasCheckeadas)
-  return categoriasCheckeadas
-}
+  const allCheckbox = document.querySelectorAll(".valores-check");
+  let arrayCheckbox = Array.from(allCheckbox);  
+  let checkeados = arrayCheckbox.filter((chek) => chek.checked);
+  let categoriasCheckeadas = checkeados.map((check) => check.value);  
+  return categoriasCheckeadas;
+};
 
 const filtrarPorNombre = (arrayData, texto) => {
   if (texto == "") {
     return arrayData;
   }
-  if (texto !== "") {
-    let filtroPoNombre = arrayData.filter((event) =>
-      event.name.toLowerCase().includes(texto.toLowerCase())
-    );
-    console.log(filtroPoNombre);
-    return filtroPoNombre;
-  }
+  let filtroPoNombre = arrayData.filter((event) =>
+    event.name.toLowerCase().includes(texto.toLowerCase())
+  );  
+  return filtroPoNombre;
 };
 
 const filtrarPorCategorias = (arrayData, categorias) => {
   if (categorias.length === 0) {
     return arrayData;
   }
-  if (categorias.length > 0) {
-    let arrayPorCategoria = arrayData.filter((event) =>
-      categorias.includes(event.category)
-    );
-    return arrayPorCategoria;
-  }
+  let arrayPorCategoria = arrayData.filter((event) =>
+    categorias.includes(event.category)
+  );
+  return arrayPorCategoria;
 };
 
-const noEncontrado = () => {
-  console.log("pinte no encontrado");
+const noEncontrado = () => {  
   const cont = document.querySelector(".cards-section");
   cont.innerHTML = `<div id="container-warning">
   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">

@@ -2,18 +2,11 @@ let dataEvents;
 
 const obtenerEventos = async () => {
   try {
-    const response = await fetch(
-      "https://mindhub-xj03.onrender.com/api/amazing"
-    );
-    if (response.status === 404) {
-      const response = await fetch(
-        "http://127.0.0.1:5500/assets/api/amazing.json"
-      );
-      dataEvents = await response.json();
+    let response = await fetch ("https://mindhub-xj03.onrender.com/api/amazing")
+    if (response.status !== 200) {
+      response = await fetch ("http://127.0.0.1:5500/assets/api/amazing.json")
     }
-    if (response.status === 200) {
-      dataEvents = await response.json();
-    }
+    dataEvents = await response.json()
 
     const { events } = dataEvents;
 
@@ -43,11 +36,9 @@ const obtenerEventos = async () => {
       if (filtradosPorCategoria.length == 0) {
         return noEncontrado();
       }
-      if (filtradosPorCategoria.length > 0) {
-        mostrarCards(filtradosPorCategoria);
-      }
+      mostrarCards(filtradosPorCategoria);      
     };
-
+    
     inputSearch.addEventListener("input", filtrarCombinado);
 
     contentCheckbox.addEventListener("change", filtrarCombinado);

@@ -2,18 +2,11 @@ let dataEvents;
 
 const obtenerEventos = async () => {
   try {
-    const response = await fetch(
-      "https://mindhub-xj03.onrender.com/api/amazing"
-    );
-    if (response.status === 404) {
-      const response = await fetch(
-        "http://127.0.0.1:5500/assets/api/amazing.json"
-      );
-      dataEvents = await response.json();
+    let response = await fetch ("https://mindhub-xj03.onrender.com/api/amazing")
+    if (response.status !== 200) {
+      response = await fetch ("http://127.0.0.1:5500/assets/api/amazing.json")
     }
-    if (response.status === 200) {
-      dataEvents = await response.json();
-    }
+    dataEvents = await response.json()
 
     console.log(dataEvents);
 
@@ -99,12 +92,6 @@ const obtenerEventos = async () => {
     generarEstadisticas(arrayUpcommings, categoriasUpcommings, upcommingsStats)
     generarEstadisticas(arrayPast, categoriasPast, pastStats)
     
-    console.log(upcommingsStats)
-
-    console.log("--------------------------")
-
-    console.log(pastStats)
-
     const ordenarPorPorcentajeMayor = structuredClone(arrayPast).sort((a,b) => {
       if (a.porcentajeAsistencia < b.porcentajeAsistencia) {
         return 1;
@@ -145,7 +132,7 @@ const obtenerEventos = async () => {
     const eventoMenorAsistencia = ordenarPorPorcentajeMenor.find(event => event.porcentajeAsistencia > 0)
     templateTablaUno.getElementById("menor-porcentaje").textContent = `${eventoMenorAsistencia.name} (${eventoMenorAsistencia.porcentajeAsistencia}%)`
     const eventoMayorCapacidad = ordenarPorCapacidadMayor.find(event => event.capacity > 0)
-    templateTablaUno.getElementById("mayor-capacidad").textContent = `${eventoMayorCapacidad.name} (${eventoMayorCapacidad.capacity})`
+    templateTablaUno.getElementById("mayor-capacidad").textContent = `${eventoMayorCapacidad.name} (${eventoMayorCapacidad.capacity.toLocaleString()})`
 
     let clonarRegistro = templateTablaUno.cloneNode(true)
 
@@ -161,7 +148,7 @@ const obtenerEventos = async () => {
     
     upcommingsStats.forEach(event => {
       templateTablaDos.getElementById("categoria-upcommings").textContent = event.nombre
-      templateTablaDos.getElementById("ganancias-upcommings").textContent = `$${event.ganancias}` 
+      templateTablaDos.getElementById("ganancias-upcommings").textContent = `${event.ganancias.toLocaleString()} USD` 
       templateTablaDos.getElementById("porcentaje-upcommings").textContent = `${event.porcentajeAsistencia}%` 
 
       let clonarRegistro = templateTablaDos.cloneNode(true)
@@ -178,7 +165,7 @@ const obtenerEventos = async () => {
     
     pastStats.forEach(event => {
       templateTablaTres.getElementById("categoria-past").textContent = event.nombre
-      templateTablaTres.getElementById("ganancias-past").textContent = `$${event.ganancias}` 
+      templateTablaTres.getElementById("ganancias-past").textContent = `${event.ganancias.toLocaleString()} USD` 
       templateTablaTres.getElementById("porcentaje-past").textContent = `${event.porcentajeAsistencia}%` 
 
       let clonarRegistro = templateTablaTres.cloneNode(true)
@@ -186,16 +173,7 @@ const obtenerEventos = async () => {
     })
 
     contenedorTablaTres.appendChild(fragmentTablaTres)
-
-    console.log(ordenarPorPorcentajeMayor)
-    console.log(ordenarPorPorcentajeMenor)
-    console.log(ordenarPorCapacidadMayor)
-
-    console.log(contenedorTablaUno)
-
-    /* let categoriasPast = filtrarCategorias(arrayPast);
-    categoriasPast.forEach((categoria) => calcularStats(arrayPast, categoria)
-    )  */   
+        
   } catch (error) {
     console.log(error);
   }
