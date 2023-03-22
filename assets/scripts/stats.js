@@ -90,37 +90,15 @@ const obtenerEventos = async () => {
     generarEstadisticas(arrayUpcommings, categoriasUpcommings, upcommingsStats)
     generarEstadisticas(arrayPast, categoriasPast, pastStats)
     
-    const ordenarPorPorcentajeMayor = structuredClone(arrayPast).sort((a,b) => {
-      if (a.porcentajeAsistencia < b.porcentajeAsistencia) {
-        return 1;
-      }
-      if (a.porcentajeAsistencia > b.porcentajeAsistencia) {
-        return -1;
-      }
-      return 0;
-    })
+    const ordenarPorPorcentajeMayor = structuredClone(arrayPast).sort((a,b) => {return b.porcentajeAsistencia - a.porcentajeAsistencia})
 
-    const ordenarPorPorcentajeMenor = structuredClone(arrayPast).sort((a,b) => {
-      if (a.porcentajeAsistencia < b.porcentajeAsistencia) {
-        return -1;
-      }
-      if (a.porcentajeAsistencia > b.porcentajeAsistencia) {
-        return 1;
-      }
-      return 0;
-    })
+    console.log(ordenarPorPorcentajeMayor)
+
+    const ordenarPorPorcentajeMenor = structuredClone(arrayPast).sort((a,b) => {return a.porcentajeAsistencia - b.porcentajeAsistencia})
 
     console.log(ordenarPorPorcentajeMenor)
 
-    const ordenarPorCapacidadMayor = structuredClone(arrayPast).sort((a,b) => {
-      if (a.capacity < b.capacity) {
-        return 1;
-      }
-      if (a.capacity > b.capacity) {
-        return -1;
-      }
-      return 0;
-    })
+    const ordenarPorCapacidadMayor = structuredClone(arrayPast).sort((a,b) => {return b.capacity - a.capacity})
 
     let contenedorTabla, templateTabla, fragmentTabla
 
