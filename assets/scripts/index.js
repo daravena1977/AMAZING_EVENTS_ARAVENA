@@ -3,7 +3,7 @@ let dataEvents;
 const obtenerEventos = async () => {
   try {
     let response = await fetch ("https://mindhub-xj03.onrender.com/api/amazing")
-    if (response.status !== 200) {
+    if (response.status !== 200) {      
       response = await fetch ("http://127.0.0.1:5500/assets/api/amazing.json")
     }
     dataEvents = await response.json()
