@@ -19,39 +19,36 @@ const obtenerEventos = async () => {
 
     let esFuturo = false
 
-    const eventosFuturos = events.filter((event) => event.date > currentDate);
-
-    const eventosPasados = events.filter((event) => event.date < currentDate);
-
-    const generarArrayPorFecha = (array, tiempo) => {
-      arrayPorFecha = array.map((event) => {
-      let nuevoArray = {};
-      nuevoArray.name = event.name;
-      nuevoArray.category = event.category;
-      nuevoArray.capacity = event.capacity;
-      nuevoArray.price = event.price;
-      if (tiempo == true) {
-        nuevoArray.estimate = event.estimate;
-        nuevoArray.ganancia = parseInt(event.price * event.estimate);
-        nuevoArray.porcentajeAsistencia = parseFloat(((event.estimate / event.capacity)*100).toFixed(2))
-        return nuevoArray;
-      }
-      nuevoArray.assistance = event.assistance;
-      nuevoArray.ganancia = parseInt(event.price * event.assistance);
-      nuevoArray.porcentajeAsistencia = parseFloat(((event.assistance / event.capacity)*100).toFixed(2))
-      return nuevoArray;      
-      })
-      return arrayPorFecha
-    }
-
-    const arrayUpcommings = generarArrayPorFecha(eventosFuturos, esFuturo = true)
-
+    const arrayUpcommings = events
+              .filter((event) => event.date > currentDate)
+              .map(event => {
+                let nuevoArray = {}
+                nuevoArray.name = event.name;
+                nuevoArray.category = event.category;
+                nuevoArray.capacity = event.capacity;
+                nuevoArray.price = event.price;
+                nuevoArray.estimate = event.estimate;
+                nuevoArray.ganancia = parseInt(event.price * event.estimate);
+                nuevoArray.porcentajeAsistencia = parseFloat(((event.estimate / event.capacity)*100).toFixed(2))
+                return nuevoArray;
+              });
     console.log(arrayUpcommings)
 
-    const arrayPast = generarArrayPorFecha(eventosPasados, esFuturo = false)
+    const arrayPast = events
+              .filter((event) => event.date < currentDate)
+              .map(event => {
+                let nuevoArray = {}
+                nuevoArray.name = event.name;
+                nuevoArray.category = event.category;
+                nuevoArray.capacity = event.capacity;
+                nuevoArray.price = event.price;
+                nuevoArray.assistance = event.assistance;
+                nuevoArray.ganancia = parseInt(event.price * event.assistance);
+                nuevoArray.porcentajeAsistencia = parseFloat(((event.assistance / event.capacity)*100).toFixed(2))
+                return nuevoArray
+              });
+    console.log(arrayPast);
 
-    console.log(arrayPast)
-    
     const calcularGananciaTotal = (array, categoria) => {
       let gananciaTotaL = 0
       array.forEach((event) => {        

@@ -413,11 +413,13 @@ th {
 
 tbody tr:nth-child(even) {
   background-color: #ddd;
+  transition: all 300ms;
 }
 
 tr:hover {
   background-color: #eb071a !important;
   color: white;
+  
 }
 
 .filtro {
