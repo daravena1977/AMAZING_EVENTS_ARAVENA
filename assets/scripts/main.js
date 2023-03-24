@@ -1,14 +1,37 @@
 console.log(Vue);
 
-const {createApp} = Vue
+const { createApp } = Vue;
 
-createApp({
-  data(){
+const app = createApp({
+  data() {
     return {
-      mensaje: "Hola Vue!"
-    }
-  }
-}).mount("#app")
+      dataEvents: {},
+      events: {},
+    };
+  },
+  created() {
+    this.obtenerDatos();
+  },
+  mounted() {},
+  methods: {
+    async obtenerDatos() {
+      try {
+        const response = await axios.get(
+          "https://mindhub-xj03.onrender.com/api/amazing"
+        );
+        this.dataEvents = response.data;
+        const { events } = this.dataEvents;
+        this.events = events;
+        console.log(this.events);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  },
+  computed: {
+    
+  },
+}).mount("#app");
 
 /* let dataEvents;
 
