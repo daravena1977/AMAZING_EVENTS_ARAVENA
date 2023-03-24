@@ -1,4 +1,16 @@
-let dataEvents;
+console.log(Vue);
+
+const {createApp} = Vue
+
+createApp({
+  data(){
+    return {
+      mensaje: "Hola Vue!"
+    }
+  }
+}).mount("#app")
+
+/* let dataEvents;
 
 const obtenerEventos = async () => {
   try {
@@ -47,4 +59,4 @@ const obtenerEventos = async () => {
   }
 };
 
-obtenerEventos();
+obtenerEventos(); */
