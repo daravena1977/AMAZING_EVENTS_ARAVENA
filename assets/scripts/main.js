@@ -6,80 +6,124 @@ const app = createApp({
   data() {
     return {
       dataEvents: {},
-      events: {},
+      events: [],
+      checkChecked: [],
+      categorias: [],
+      texto: "",
+      noEncontrado: false,
+      eventosMostrar : [],
+      filtradosPorNombre: [],
+      filtradosPorCategoria: [],
+      inputIsActivo: false,      
     };
   },
   created() {
-    this.obtenerDatos();
+    this.obtenerDatos()   
   },
-  mounted() {},
+  mounted() {
+    
+  },
   methods: {
     async obtenerDatos() {
       try {
-        const response = await axios.get(
+        let response = await axios.get(
           "https://mindhub-xj03.onrender.com/api/amazing"
-        );
+        )
+        console.log(response);
+        if (response.request.status !== 200) {
+          response = await axios.get("http://127.0.0.1:5500/assets/api/amazing.json")
+        }
         this.dataEvents = response.data;
         const { events } = this.dataEvents;
         this.events = events;
-        console.log(this.events);
+        this.eventosMostrar = this.events
+        /* this.filtradosPorNombre = this.events */
+        console.log(this.events);        
+        this.categorias = new Set(this.events.map(event => event.category))
+        console.log(this.categorias);
       } catch (e) {
         console.error(e);
       }
     },
+    filtrarCombinado() {
+      this.filtrarPorNombre()
+      this.filtrarPorCategorias()      
+    },
+    filtrarPorNombre() {
+      if (this.texto == "") {        
+        this.filtradosPorNombre = this.events;        
+      }
+      if (this.texto !== "") {
+        this.inputIsActivo = true
+      }
+      this.filtradosPorNombre = this.events.filter((event) =>
+        event.name.toLowerCase().includes(this.texto.toLowerCase())); 
+
+      if (this.filtradosPorNombre.length == 0) {        
+        this.noEncontrado = true
+      } else {
+        
+        this.noEncontrado = false
+      }      
+      return this.filtradosPorNombre
+    },
+    filtrarPorCategorias() {
+      if (this.checkChecked.length == 0) {               
+        return this.eventosMostrar = this.filtradosPorNombre;        
+      }
+      this.filtradosPorCategoria = this.filtradosPorNombre.filter((event) =>
+        this.checkChecked.includes(event.category)
+      );
+
+      this.eventosMostrar = this.filtradosPorCategoria
+      console.log(this.eventosMostrar.length);
+
+      if (this.eventosMostrar.length == 0) {
+        this.noEncontrado = true
+      } else {
+        this.noEncontrado = false
+      }       
+    },    
   },
-  computed: {
-    
+  computed: {    
+    /* filtrarCombinado: function() {
+      this.filtrarPorNombre
+      this.filtrarPorCategorias      
+    },
+    filtrarPorNombre: function() {
+      if (this.texto == "") {        
+        this.filtradosPorNombre = this.events;        
+      }
+      this.filtradosPorNombre = this.events.filter((event) =>
+        event.name.toLowerCase().includes(this.texto.toLowerCase()));
+      console.log("hice esto otro")
+
+      if (this.filtradosPorNombre.length == 0) {
+        console.log("pase por aqui")
+        this.noEncontrado = true
+      }
+
+      
+      return this.filtradosPorNombre
+    },
+    filtrarPorCategorias: function() {
+      if (this.checkChecked.length == 0) {
+        console.log("check blanco");        
+        return this.eventosMostrar = this.filtradosPorNombre;        
+      }
+      this.filtradosPorCategoria = this.filtradosPorNombre.filter((event) =>
+        this.checkChecked.includes(event.category)
+      );
+      console.log("hice esto")
+      
+      
+      this.eventosMostrar = this.filtradosPorCategoria
+      console.log(this.eventosMostrar.length);
+
+      if (this.eventosMostrar.length == 0) {
+        this.noEncontrado = true
+      } 
+       
+    }, */
   },
 }).mount("#app");
-
-/* let dataEvents;
-
-const obtenerEventos = async () => {
-  try {
-    let response = await fetch ("https://mindhub-xj03.onrender.com/api/amazing")
-    if (response.status !== 200) {      
-      response = await fetch ("http://127.0.0.1:5500/assets/api/amazing.json")
-    }
-    dataEvents = await response.json()
-
-    const { events } = dataEvents;
-
-    const contentCheckbox = document.getElementById("check-category");
-    const inputSearch = document.getElementById("input-search");
-    const botonSearch = document.querySelector(".search-category input");
-
-    mostrarCards(events);
-
-    filtrarCategorias(events);
-
-    mostrarCategorias(filtrarCategorias, events);
-
-    inputSearch.addEventListener("input", () => {
-      if (inputSearch.value !== "") {
-        botonSearch.style.width = "300px";
-      }
-    });
-
-    const filtrarCombinado = () => {
-      let filtradosPorNombre = filtrarPorNombre(events, inputSearch.value);
-      let checkeados = categoriasChecked();
-      let filtradosPorCategoria = filtrarPorCategorias(
-        filtradosPorNombre,
-        checkeados
-      );
-      if (filtradosPorCategoria.length == 0) {
-        return noEncontrado();
-      }
-      mostrarCards(filtradosPorCategoria);      
-    };
-    
-    inputSearch.addEventListener("input", filtrarCombinado);
-
-    contentCheckbox.addEventListener("change", filtrarCombinado);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-obtenerEventos(); */

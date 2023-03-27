@@ -438,6 +438,10 @@ tr:hover {
   color: red !important;
 }
 
+.fijarInput {
+  width: 300px !important;
+}
+
 /* RESPONSIVE */
 
 @media (min-width: 510px) {
