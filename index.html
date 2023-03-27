@@ -131,7 +131,7 @@
                       <h6>Price:</h6>
                       <p>{{event.price}} USD</p>
                     </section>
-                      <a href="./details.html" class="btn btn-primary">Details</a>
+                      <a v-bind:href="'./details.html?id=' + event._id" class="btn btn-primary">Details</a>
                   </div>
                 </div>
               </div>
