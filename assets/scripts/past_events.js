@@ -87,44 +87,6 @@ const app = createApp({
     },    
   },
   computed: {    
-    /* filtrarCombinado: function() {
-      this.filtrarPorNombre
-      this.filtrarPorCategorias      
-    },
-    filtrarPorNombre: function() {
-      if (this.texto == "") {        
-        this.filtradosPorNombre = this.events;        
-      }
-      this.filtradosPorNombre = this.events.filter((event) =>
-        event.name.toLowerCase().includes(this.texto.toLowerCase()));
-      console.log("hice esto otro")
-
-      if (this.filtradosPorNombre.length == 0) {
-        console.log("pase por aqui")
-        this.noEncontrado = true
-      }
-
-      
-      return this.filtradosPorNombre
-    },
-    filtrarPorCategorias: function() {
-      if (this.checkChecked.length == 0) {
-        console.log("check blanco");        
-        return this.eventosMostrar = this.filtradosPorNombre;        
-      }
-      this.filtradosPorCategoria = this.filtradosPorNombre.filter((event) =>
-        this.checkChecked.includes(event.category)
-      );
-      console.log("hice esto")
-      
-      
-      this.eventosMostrar = this.filtradosPorCategoria
-      console.log(this.eventosMostrar.length);
-
-      if (this.eventosMostrar.length == 0) {
-        this.noEncontrado = true
-      } 
-       
-    }, */
+    
   },
 }).mount("#app");
