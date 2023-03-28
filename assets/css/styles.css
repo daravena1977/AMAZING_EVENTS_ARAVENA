@@ -233,11 +233,19 @@ body {
   padding: 15px !important;
 }
 
+span {
+  font-size: 12px;
+  color: #0fa3b1;
+  font-weight:900;
+  letter-spacing: 2px; 
+}
+
 .card-body h5 {
   font-weight: 400;
   text-align: center;
   font-size: 20px;
   margin-bottom: 15px;
+  margin-top: 20px;
 }
 
 .card-text {
@@ -291,7 +299,8 @@ footer {
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+  background-color: #def3f3;  
+  box-shadow:  4px 5px 6px 1px rgba(0, 0, 0, 0.25);
   
 }
 
@@ -315,6 +324,10 @@ footer {
   
 }
 
+#description {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
 .card-details p {
   margin-bottom: 1.5rem;
 }
@@ -322,6 +335,7 @@ footer {
 .color {
   color: #780000;
   text-shadow: 2px 1px 10px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
 }
 
 .card-details p {
@@ -332,6 +346,12 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center !important;
+}
+
+#price {
+  font-size: 25px;
+  color: #3d348b;
+  font-weight: 900;
 }
 
 /* FORM-CONTACT */
@@ -576,9 +596,9 @@ tr:hover {
   .details {
     display: flex;
     flex-direction: row;
-    margin: 6.6rem;
+    margin: 3rem;    
+    justify-content: center;   
     
-    justify-content: center;
   }
 
   .details img {
@@ -588,8 +608,7 @@ tr:hover {
   }
 
   .card-details {
-    width: 50%;
-    height: 59.5vh;
+    width: 50%;    
     padding: 2rem;
     
   }
@@ -603,6 +622,18 @@ tr:hover {
   .card-details {
     width: 50%;
   }
+}
+
+@media (min-width: 1400px){
+  .details {
+    display: flex;
+    flex-direction: row;
+    margin: 6.6rem;    
+    justify-content: center;
+    height: 63.5vh;    
+  }
+
+  
 }
 
 

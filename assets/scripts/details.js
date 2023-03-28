@@ -39,8 +39,9 @@ const obtenerEventos = async () => {
     const evento = eventos.find((evento) => evento._id == id);
     
 
-    const content = document.querySelector(".details");
-    content.innerHTML = `<img src=${evento.image} alt="">
+    const content = document.querySelector("main");
+    content.innerHTML = `<div class="details">
+    <img src=${evento.image} alt="">
   <section class="card-details">
     <h2 class="color">${evento.name}</h2>
     <h5>Category</h5>
@@ -59,7 +60,8 @@ const obtenerEventos = async () => {
       <h5>Price:</h5>
       <p id="price">${evento.price.toLocaleString()} USD</p>
     </div>
-  </section>`;    
+  </section>
+  </div>`;    
   } catch (error) {
     console.log(error);
   }

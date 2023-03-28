@@ -5,6 +5,7 @@ const mostrarCards = (arrayData) => {
     <img src="" class="card-img-top" alt="...">
     <div class="card-body">
       <section>
+        <span></span>
         <h5 class="card-title"></h5>
         <p class="card-text">
             
@@ -24,7 +25,8 @@ const mostrarCards = (arrayData) => {
 
   const fragment = document.createDocumentFragment();
   arrayData.forEach((event) => {
-    const { image, name, price, description, _id } = event;
+    const { image, name, price, description, _id, category } = event;
+    template.querySelector("span").textContent = category
     template.querySelector("img").setAttribute("src", image);
     template.querySelector(".card-title").textContent = name;
     template.querySelector(".card-body section p").textContent = description;
