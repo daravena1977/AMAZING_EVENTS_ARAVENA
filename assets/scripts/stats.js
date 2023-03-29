@@ -4,12 +4,21 @@ const app = createApp({
   data() {
     return {
       dataEvents: {},
-      events: [],
-      evento: "",
+      events: [],      
+      arrayUpcommings: [],
+      arrayPast: [],
+      eventoMayorPorcentaje: "",
+      eventoMenorPorcentaje: "",
+      eventoMayorCapacidad: "",      
+      categorias: [],
+      statsUpcommings: [],
+      statsPast: [],
+      arrayPorCategoria: [],
     };
   },
   created() {
     this.obtenerDatos();
+
   },
   methods: {
     async obtenerDatos() {
@@ -25,217 +34,97 @@ const app = createApp({
         this.dataEvents = response.data;
         const { events, currentDate } = this.dataEvents;
         this.events = events;
-        const querySearch = document.location.search;
-        const id = new URLSearchParams(querySearch).get("id");
-        this.evento = this.events.find((event) => event._id == id);
+
+        this.arrayUpcommings = this.events
+          .filter(event => event.date > currentDate)
+          .map(event => {
+            let nuevoArray = []
+            nuevoArray.name = event.name
+            nuevoArray.category = event.category;
+            nuevoArray.capacity = event.capacity;
+            nuevoArray.date = event.date
+            nuevoArray.price = event.price;
+            nuevoArray.estimate = event.estimate;
+            nuevoArray.ganancia = parseInt(event.price * event.estimate);
+            nuevoArray.porcentajeAsistencia = parseFloat(
+              ((event.estimate / event.capacity) * 100).toFixed(2))
+
+            return nuevoArray;
+          })
+
+        console.log(this.arrayUpcommings)
+
+        this.arrayPast = this.events
+          .filter(event => event.date < currentDate)
+          .map(event => {
+            let nuevoArray = []
+            nuevoArray.name = event.name
+            nuevoArray.category = event.category
+            nuevoArray.capacity = event.capacity
+            nuevoArray.date = event.date
+            nuevoArray.price = event.price
+            nuevoArray.assistance = event.assistance
+            nuevoArray.ganancia = parseInt(event.price * event.assistance);
+            nuevoArray.porcentajeAsistencia = parseFloat(((event.assistance / event.capacity) * 100).toFixed(2))
+
+            return nuevoArray;
+          })
+        this.filtrarMayorPorcentaje()
+        this.filtrarMenorPorcentaje()
+        this.filtrarMayorCapacidad()
+
+        this.categorias = new Set(this.events.map(event => event.category))
+        console.log(this.categorias);
+
+        this.statsPorCategoria(this.arrayUpcommings, this.statsUpcommings)        
+        this.statsPorCategoria(this.arrayPast, this.statsPast)        
+        
       } catch (e) {
         console.error(e);
       }
     },
-  },
-}).mount("#app");
-
-let dataEvents;
-
-const obtenerEventos = async () => {
-  try {
-    let response = await fetch("https://mindhub-xj03.onrender.com/api/amazing");
-    if (response.status !== 200) {
-      response = await fetch("http://127.0.0.1:5500/assets/api/amazing.json");
+    filtrarMayorPorcentaje() {
+      let arrayParaOrdenar = this.arrayPast
+      this.eventoMayorPorcentaje = arrayParaOrdenar.sort(
+        (a, b) => {
+          return b.porcentajeAsistencia - a.porcentajeAsistencia;
+        }
+      ).find(event => event.porcentajeAsistencia)
+    },
+    filtrarMenorPorcentaje() {
+      let arrayParaOrdenar = this.arrayPast
+      this.eventoMenorPorcentaje = arrayParaOrdenar.sort((a, b) => {
+        return a.porcentajeAsistencia - b.porcentajeAsistencia
+      }).find(event => event.porcentajeAsistencia)
+    },
+    filtrarMayorCapacidad() {
+      let arrayParaOrdenar = this.arrayPast
+      this.eventoMayorCapacidad = arrayParaOrdenar.sort(
+        (a, b) => {
+          return b.capacity - a.capacity;
+        }
+      ).find(event => event.capacity)
+    },
+    statsPorCategoria(arrayData, arrayMostrar) {
+      this.categorias.forEach(categoria => {        
+        this.arrayPorCategoria = arrayData.filter(event => event.category == categoria)
+        if (this.arrayPorCategoria.length !== 0) {
+          let totalGanancias = this.arrayPorCategoria
+              .map(event => event.ganancia)
+              .reduce((a, b) => a + b, 0)
+          let porcentajeAsistenciaTotal = this.arrayPorCategoria
+              .map(event => event.porcentajeAsistencia)
+              .reduce((a, b) => a + b, 0) / this.arrayPorCategoria.length         
+          let resumenCategoria = {}
+          resumenCategoria.nombre = categoria
+          resumenCategoria.ganancias = totalGanancias
+          resumenCategoria.asistencia = porcentajeAsistenciaTotal.toFixed(2)
+          arrayMostrar.push(resumenCategoria)
+        }
+      });
     }
-    dataEvents = await response.json();
+  },
+  computed: {
 
-    console.log(dataEvents);
-
-    const { currentDate, events } = dataEvents;
-    const { category } = events;
-
-    let upcommingsStats = [];
-    let pastStats = [];
-    let arrayPorFecha = [];
-
-    let esFuturo = false;
-
-    const arrayUpcommings = events
-      .filter((event) => event.date > currentDate)
-      .map((event) => {
-        let nuevoArray = {};
-        nuevoArray.name = event.name;
-        nuevoArray.category = event.category;
-        nuevoArray.capacity = event.capacity;
-        nuevoArray.price = event.price;
-        nuevoArray.estimate = event.estimate;
-        nuevoArray.ganancia = parseInt(event.price * event.estimate);
-        nuevoArray.porcentajeAsistencia = parseFloat(
-          ((event.estimate / event.capacity) * 100).toFixed(2)
-        );
-        return nuevoArray;
-      });
-    console.log(arrayUpcommings);
-
-    const arrayPast = events
-      .filter((event) => event.date < currentDate)
-      .map((event) => {
-        let nuevoArray = {};
-        nuevoArray.name = event.name;
-        nuevoArray.category = event.category;
-        nuevoArray.capacity = event.capacity;
-        nuevoArray.price = event.price;
-        nuevoArray.assistance = event.assistance;
-        nuevoArray.ganancia = parseInt(event.price * event.assistance);
-        nuevoArray.porcentajeAsistencia = parseFloat(
-          ((event.assistance / event.capacity) * 100).toFixed(2)
-        );
-        return nuevoArray;
-      });
-    console.log(arrayPast);
-
-    const calcularGananciaTotal = (array, categoria) => {
-      let gananciaTotaL = 0;
-      array.forEach((event) => {
-        if (categoria == event.category) {
-          gananciaTotaL += event.ganancia;
-        }
-      });
-      return gananciaTotaL;
-    };
-
-    const calcularPorcentajeAsistencia = (array, categoria) => {
-      let sumaDePorcentajes = 0;
-      let numEventosDeCategoria = 0;
-      array.forEach((event) => {
-        if (categoria == event.category) {
-          sumaDePorcentajes += event.porcentajeAsistencia;
-          numEventosDeCategoria++;
-        }
-      });
-      let porcentajeCategoria = parseFloat(
-        (sumaDePorcentajes / numEventosDeCategoria).toFixed(2)
-      );
-      return porcentajeCategoria;
-    };
-
-    const generarEstadisticas = (arrayEventos, arrayCategorias, nuevoArray) => {
-      arrayCategorias.forEach((categoria) => {
-        let gananciaTotal = calcularGananciaTotal(arrayEventos, categoria);
-        let porcentajeAsistencia = calcularPorcentajeAsistencia(
-          arrayEventos,
-          categoria
-        );
-        let categoriaStats = {};
-        categoriaStats.nombre = categoria;
-        categoriaStats.ganancias = gananciaTotal;
-        categoriaStats.porcentajeAsistencia = porcentajeAsistencia;
-        nuevoArray.push(categoriaStats);
-      });
-    };
-
-    let categoriasUpcommings = filtrarCategorias(arrayUpcommings);
-    let categoriasPast = filtrarCategorias(arrayPast);
-
-    generarEstadisticas(arrayUpcommings, categoriasUpcommings, upcommingsStats);
-    generarEstadisticas(arrayPast, categoriasPast, pastStats);
-
-    const ordenarPorPorcentajeMayor = structuredClone(arrayPast).sort(
-      (a, b) => {
-        return b.porcentajeAsistencia - a.porcentajeAsistencia;
-      }
-    );
-
-    console.log(ordenarPorPorcentajeMayor);
-
-    const ordenarPorPorcentajeMenor = structuredClone(arrayPast).sort(
-      (a, b) => {
-        return a.porcentajeAsistencia - b.porcentajeAsistencia;
-      }
-    );
-
-    console.log(ordenarPorPorcentajeMenor);
-
-    const ordenarPorCapacidadMayor = structuredClone(arrayPast).sort((a, b) => {
-      return b.capacity - a.capacity;
-    });
-
-    let contenedorTabla, templateTabla, fragmentTabla;
-
-    const capturarElementosHtml = (selctorContendor, selectorTemplate) => {
-      contenedorTabla = document.getElementById(selctorContendor);
-      templateTabla = document.getElementById(selectorTemplate).content;
-      fragmentTabla = document.createDocumentFragment();
-    };
-
-    //Estadisticas primera tabla (despliegue en html)
-    capturarElementosHtml("tbody-tabla-uno", "template-tabla-uno");
-
-    const eventoMayorAsistencia = ordenarPorPorcentajeMayor.find(
-      (event) => event.porcentajeAsistencia > 0
-    );
-    templateTabla.getElementById(
-      "mayor-porcentaje"
-    ).textContent = `${eventoMayorAsistencia.name} (${eventoMayorAsistencia.porcentajeAsistencia}%)`;
-    const eventoMenorAsistencia = ordenarPorPorcentajeMenor.find(
-      (event) => event.porcentajeAsistencia > 0
-    );
-    templateTabla.getElementById(
-      "menor-porcentaje"
-    ).textContent = `${eventoMenorAsistencia.name} (${eventoMenorAsistencia.porcentajeAsistencia}%)`;
-    const eventoMayorCapacidad = ordenarPorCapacidadMayor.find(
-      (event) => event.capacity > 0
-    );
-    templateTabla.getElementById("mayor-capacidad").textContent = `${
-      eventoMayorCapacidad.name
-    } (${eventoMayorCapacidad.capacity.toLocaleString()})`;
-
-    let clonarRegistro = templateTabla.cloneNode(true);
-
-    fragmentTabla.appendChild(clonarRegistro);
-
-    contenedorTabla.appendChild(fragmentTabla);
-
-    //Estadisticas segunda Tabla (despliegue en html)
-
-    const mostrarPorcentajesStats = (
-      array,
-      selectorCategoria,
-      selectorGanancias,
-      selectorPorcentajes
-    ) => {
-      array.forEach((event) => {
-        templateTabla.getElementById(selectorCategoria).textContent =
-          event.nombre;
-        templateTabla.getElementById(
-          selectorGanancias
-        ).textContent = `${event.ganancias.toLocaleString()} USD`;
-        templateTabla.getElementById(
-          selectorPorcentajes
-        ).textContent = `${event.porcentajeAsistencia}%`;
-
-        let clonarRegistro = templateTabla.cloneNode(true);
-        fragmentTabla.appendChild(clonarRegistro);
-      });
-      contenedorTabla.appendChild(fragmentTabla);
-    };
-
-    capturarElementosHtml("tbody-tabla-dos", "template-tabla-dos");
-    mostrarPorcentajesStats(
-      upcommingsStats,
-      "categoria-upcommings",
-      "ganancias-upcommings",
-      "porcentaje-upcommings"
-    );
-
-    //Estadisticas tercera Tabla (despliegue en html)
-
-    capturarElementosHtml("tbody-tabla-tres", "template-tabla-tres");
-    mostrarPorcentajesStats(
-      pastStats,
-      "categoria-past",
-      "ganancias-past",
-      "porcentaje-past"
-    );
-  } catch (error) {
-    console.log(error);
   }
-};
-
-obtenerEventos();
+}).mount("#app");
