@@ -630,7 +630,7 @@ tr:hover {
     flex-direction: row;
     margin: 6.6rem;    
     justify-content: center;
-    height: 63.5vh;    
+    min-height: 63.5vh;    
   }
 
   
