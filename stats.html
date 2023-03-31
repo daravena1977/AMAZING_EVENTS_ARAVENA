@@ -118,8 +118,8 @@
             <template v-for="categoria of statsUpcommings" id="template-tabla-dos">
               <tr class="td-contenido">
                 <td id="categoria-upcommings">{{categoria.nombre}}</td>
-                <td id="ganancias-upcommings">{{categoria.ganancias}}</td>
-                <td id="porcentaje-upcommings">{{categoria.asistencia}}</td>
+                <td id="ganancias-upcommings">{{categoria.ganancias}} USD</td>
+                <td id="porcentaje-upcommings">{{categoria.asistencia}}%</td>
               </tr>
             </template>
           </tbody>
@@ -140,12 +140,13 @@
             <template v-for="categoria of statsPast" id="template-tabla-tres">
               <tr class="td-contenido">
                 <td id="categoria-past">{{categoria.nombre}}</td>
-                <td id="ganancias-past">{{categoria.ganancias}}</td>
-                <td id="porcentaje-past">{{categoria.asistencia}}</td>
+                <td id="ganancias-past">{{categoria.ganancias}} USD</td>
+                <td id="porcentaje-past">{{categoria.asistencia}}%</td>
               </tr>
             </template>
           </tbody>
-        </table>      
+        </table>
+        
       </main>
   
       <footer

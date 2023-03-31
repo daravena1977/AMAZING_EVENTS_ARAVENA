@@ -6,14 +6,13 @@ const app = createApp({
   data() {
     return {
       dataEvents: {},
-      events: [],
+      eventosOriginal: [],
       checkChecked: [],
       categorias: [],
       texto: "",
       noEncontrado: false,
       eventosMostrar : [],
-      filtradosPorNombre: [],
-      filtradosPorCategoria: [],
+      filtradosPorNombre: [],      
       inputIsActivo: false,      
     };
   },
@@ -26,67 +25,35 @@ const app = createApp({
   methods: {
     async obtenerDatos() {
       try {
-        let response = await axios.get(
+        let response = await fetch (
           "https://mindhub-xj03.onrender.com/api/amazing"
-        )
+        );
         console.log(response);
-        if (response.request.status !== 200) {
-          response = await axios.get("http://127.0.0.1:5500/assets/api/amazing.json")
+        if (response.status !== 200) {
+          response = await fetch(
+            "http://127.0.0.1:5500/assets/api/amazing.json"
+          );
         }
-        this.dataEvents = response.data;
+        this.dataEvents = await response.json()
         const { events, currentDate } = this.dataEvents;
-        this.events = events.filter(event => event.date < currentDate)
+        this.eventosOriginal = events.filter(event => event.date < currentDate)
         this.currentDate = currentDate
-        this.eventosMostrar = this.events
-        /* this.filtradosPorNombre = this.events */
-        console.log(this.events);        
+        this.eventosMostrar = this.eventosOriginal              
         this.categorias = new Set(events.map(event => event.category))
-        console.log(this.categorias);
       } catch (e) {
         console.error(e);
       }
-    },
-    filtrarCombinado() {
-      this.filtrarPorNombre()
-      this.filtrarPorCategorias()      
-    },
-    filtrarPorNombre() {
-      if (this.texto == "") {        
-        this.filtradosPorNombre = this.events;        
-      }
-      if (this.texto !== "") {
-        this.inputIsActivo = true
-      }
-      this.filtradosPorNombre = this.events.filter((event) =>
-        event.name.toLowerCase().includes(this.texto.toLowerCase())); 
-
-      if (this.filtradosPorNombre.length == 0) {        
-        this.noEncontrado = true
-      } else {
-        
-        this.noEncontrado = false
-      }      
-      return this.filtradosPorNombre
-    },
-    filtrarPorCategorias() {
-      if (this.checkChecked.length == 0) {               
-        return this.eventosMostrar = this.filtradosPorNombre;        
-      }
-      this.filtradosPorCategoria = this.filtradosPorNombre.filter((event) =>
-        this.checkChecked.includes(event.category)
-      );
-
-      this.eventosMostrar = this.filtradosPorCategoria
-      console.log(this.eventosMostrar.length);
-
-      if (this.eventosMostrar.length == 0) {
-        this.noEncontrado = true
-      } else {
-        this.noEncontrado = false
-      }       
-    },    
+    },   
+    
   },
   computed: {    
-    
+    filtrarCombinado (){
+      let filtradosPorTexto = this.eventosOriginal.filter((event) => event.name.toLowerCase().includes(this.texto.toLowerCase()))
+      if (this.checkChecked.length == 0) {
+        this.eventosMostrar = filtradosPorTexto
+      } else {
+        this.eventosMostrar = filtradosPorTexto.filter((event) => this.checkChecked.includes(event.category))
+      }      
+    },
   },
 }).mount("#app");

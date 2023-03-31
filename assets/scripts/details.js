@@ -14,13 +14,16 @@ const app = createApp({
   methods: {
     async obtenerDatos() {
       try {        
-        let response = await axios.get(
+        let response = await fetch (
           "https://mindhub-xj03.onrender.com/api/amazing"
-        )        
-        if (response.request.status !== 200) {
-          response = await axios.get("http://127.0.0.1:5500/assets/api/amazing.json")
+        );
+        console.log(response);
+        if (response.status !== 200) {
+          response = await fetch(
+            "http://127.0.0.1:5500/assets/api/amazing.json"
+          );
         }
-        this.dataEvents = response.data;
+        this.dataEvents = await response.json()
         const { events } = this.dataEvents;
         this.events = events        
         const querySearch = document.location.search        

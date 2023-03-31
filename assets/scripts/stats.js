@@ -117,7 +117,7 @@ const app = createApp({
               .reduce((a, b) => a + b, 0) / this.arrayPorCategoria.length         
           let resumenCategoria = {}
           resumenCategoria.nombre = categoria
-          resumenCategoria.ganancias = totalGanancias
+          resumenCategoria.ganancias = totalGanancias.toLocaleString()
           resumenCategoria.asistencia = porcentajeAsistenciaTotal.toFixed(2)
           arrayMostrar.push(resumenCategoria)
         }

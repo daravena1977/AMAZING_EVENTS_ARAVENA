@@ -78,7 +78,7 @@
             <form
               class="formulario container-search d-flex justify-content-between w-100"
               role="search">
-              <fieldset id="check-category" v-on:change="filtrarCombinado" class="d-flex justify-content-between categories w-100">
+              <fieldset id="check-category" class="d-flex justify-content-between categories w-100">
                 <template v-for="categoria of categorias" id="template-category">
                   <input class="valores-check" v-model="checkChecked" :value="categoria" type="checkbox" :name="categoria" :id="categoria">
                   <label :for="categoria">{{categoria}}</label>
@@ -87,7 +87,10 @@
               <fieldset>
                 <div class="search-category">
                   <div class="container-search">
-                    <input id="input-search" @input="filtrarCombinado" v-model="texto" :class="{fijarInput:inputIsActivo}" type="input" placeholder="Search" required>
+                    <input id="input-search" v-model="texto" :class="{fijarInput:inputIsActivo}" type="input" placeholder="Search" required>
+                    <template>
+                      {{filtrarCombinado}}
+                    </template> 
                     <div class="btn-category">
                       <i class="fas fa-search icon"></i>
                     </div>
@@ -103,7 +106,7 @@
         <div class="row">
           <div
             class="cards-section col d-flex flex-wrap justify-content-center gap-3">
-            <template v-if="noEncontrado == true">
+            <template v-if="eventosMostrar.length == 0">
               <div id="container-warning">
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
                 <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
@@ -118,6 +121,7 @@
                 <img :src="event.image" class="card-img-top" :alt="event.name">
                 <div class="card-body">
                   <section>
+                    <span>{{event.category}} </span>
                     <h5 class="card-title">{{event.name}}</h5>
                     <p class="card-text">
                         {{event.description}}
