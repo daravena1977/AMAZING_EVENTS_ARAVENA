@@ -51,5 +51,6 @@ const app = createApp({
         this.eventosMostrar = filtradosPorTexto.filter((event) => this.checkChecked.includes(event.category))
       }      
     },
+    
   }
 }).mount("#app");

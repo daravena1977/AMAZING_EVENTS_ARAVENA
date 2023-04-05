@@ -14,6 +14,8 @@ const app = createApp({
       statsUpcommings: [],
       statsPast: [],
       arrayPorCategoria: [],
+      arrayEstadisticasPorEventos: [],
+      isActive: false,
     };
   },
   created() {
@@ -71,7 +73,7 @@ const app = createApp({
           })
         this.filtrarMayorPorcentaje()
         this.filtrarMenorPorcentaje()
-        this.filtrarMayorCapacidad()
+        this.filtrarMayorCapacidad()        
 
         this.categorias = new Set(this.events.map(event => event.category))
         console.log(this.categorias);
@@ -83,6 +85,14 @@ const app = createApp({
         console.error(e);
       }
     },
+    
+    generarEstadisticasPorEventos (arrayFuente, categoria){
+      this.arrayEstadisticasPorEventos = arrayFuente.filter(evento => evento.category.includes(categoria)).sort((a, b) => b.porcentajeAsistencia - a.porcentajeAsistencia)
+      this.isActive = true;
+      console.log(this.arrayEstadisticasPorEventos)
+      console.log(categoria)      
+    },
+
     filtrarMayorPorcentaje() {
       let arrayParaOrdenar = this.arrayPast
       this.eventoMayorPorcentaje = arrayParaOrdenar.sort(
@@ -91,12 +101,14 @@ const app = createApp({
         }
       ).find(event => event.porcentajeAsistencia)
     },
+
     filtrarMenorPorcentaje() {
       let arrayParaOrdenar = this.arrayPast
       this.eventoMenorPorcentaje = arrayParaOrdenar.sort((a, b) => {
         return a.porcentajeAsistencia - b.porcentajeAsistencia
       }).find(event => event.porcentajeAsistencia)
     },
+
     filtrarMayorCapacidad() {
       let arrayParaOrdenar = this.arrayPast
       this.eventoMayorCapacidad = arrayParaOrdenar.sort(
@@ -105,6 +117,7 @@ const app = createApp({
         }
       ).find(event => event.capacity)
     },
+
     statsPorCategoria(arrayData, arrayMostrar) {
       this.categorias.forEach(categoria => {        
         this.arrayPorCategoria = arrayData.filter(event => event.category == categoria)
