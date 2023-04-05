@@ -134,7 +134,7 @@
                 </svg>
                 </td>
                 <td class="td-tabla-detalles">
-                  <template v-if="arrayEstadisticasPorEventos.length !==0 && arrayEstadisticasPorEventos[0].category == categoria.nombre">
+                  <template v-if="arrayEstadisticasPorEventos.length !==0 && arrayEstadisticasPorEventos[0].category == categoria.nombre && arrayEstadisticasPorEventos[0].date > currentDate">
                     <table class="tabla-detalles-categoria">
                       <thead>                    
                         <tr>
@@ -189,7 +189,7 @@
                 </svg>
                 </td>
                 <td class="td-tabla-detalles">
-                  <template v-if="arrayEstadisticasPorEventos.length !==0 && arrayEstadisticasPorEventos[0].category == categoria.nombre">
+                  <template v-if="arrayEstadisticasPorEventos.length !==0 && arrayEstadisticasPorEventos[0].category == categoria.nombre && arrayEstadisticasPorEventos[0].date < currentDate">
                     <table class="tabla-detalles-categoria">
                       <thead>                    
                         <tr>

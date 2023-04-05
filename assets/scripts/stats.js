@@ -4,7 +4,8 @@ const app = createApp({
   data() {
     return {
       dataEvents: {},
-      events: [],      
+      events: [],
+      currentDate: "",
       arrayUpcommings: [],
       arrayPast: [],
       eventoMayorPorcentaje: "",
@@ -36,6 +37,7 @@ const app = createApp({
         this.dataEvents = response.data;
         const { events, currentDate } = this.dataEvents;
         this.events = events;
+        this.currentDate = currentDate
 
         this.arrayUpcommings = this.events
           .filter(event => event.date > currentDate)
